@@ -2,4 +2,10 @@
 <resources>
 
     <style name="Theme.Marvel" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="Theme.Marvel.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#FFFFFF</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="postSplashScreenTheme">@style/Theme.Marvel</item>
+    </style>
 </resources>
