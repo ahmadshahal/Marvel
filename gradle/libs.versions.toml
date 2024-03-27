@@ -1,0 +1,66 @@
+[versions]
+agp = "8.3.1"
+coilCompose = "2.4.0"
+coreSplashscreen = "1.0.1"
+datastore = "1.0.0"
+koinBom = "3.5.3"
+kotlin = "1.9.0"
+kotlinSerialization = "1.9.0"
+coreKtx = "1.12.0"
+junit = "4.13.2"
+junitVersion = "1.1.5"
+espressoCore = "3.5.1"
+kotlinxCollectionsImmutable = "0.3.5"
+kotlinxSerializationJson = "1.6.2"
+ktorClientAndroid = "2.3.3"
+ktorClientAuth = "2.3.3"
+ktorClientContentNegotiation = "2.3.3"
+ktorClientCore = "2.3.3"
+ktorClientLoggingJvm = "2.3.3"
+ktorSerializationKotlinxJson = "2.3.3"
+lifecycleRuntimeKtx = "2.7.0"
+activityCompose = "1.8.2"
+composeBom = "2023.08.00"
+lottieCompose = "5.2.0"
+timber = "4.7.1"
+
+[libraries]
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
+androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
+androidx-datastore-core = { module = "androidx.datastore:datastore-core", version.ref = "datastore" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
+coil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coilCompose" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+androidx-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koinBom" }
+koin-core = { group = "io.insert-koin", name = "koin-core" }
+koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose" }
+kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlinxCollectionsImmutable" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktorClientAndroid" }
+ktor-client-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktorClientAuth" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktorClientContentNegotiation" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktorClientCore" }
+ktor-client-logging-jvm = { module = "io.ktor:ktor-client-logging-jvm", version.ref = "ktorClientLoggingJvm" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorSerializationKotlinxJson" }
+lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottieCompose" }
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+
+[plugins]
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+jetbrainsKotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
+
