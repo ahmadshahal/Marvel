@@ -2,6 +2,7 @@ package com.kotlinhero.marvel
 
 import android.app.Application
 import com.kotlinhero.marvel.common.di.KtorModule
+import com.kotlinhero.marvel.main.di.MainModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
@@ -15,7 +16,7 @@ class MarvelApplication : Application() {
             androidLogger()
             androidContext(this@MarvelApplication)
             modules(
-                // MainModule,
+                MainModule,
                 // CommonModule,
                 // CharactersModule,
                 KtorModule
