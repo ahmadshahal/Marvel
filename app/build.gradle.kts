@@ -70,7 +70,7 @@ dependencies {
 
     implementation (libs.androidx.core.splashscreen)
 
-    implementation(libs.koin.bom)
+    implementation(platform(libs.koin.bom))
     implementation(libs.koin.compose)
     implementation(libs.koin.core)
 
