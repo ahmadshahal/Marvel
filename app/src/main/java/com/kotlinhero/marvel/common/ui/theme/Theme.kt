@@ -12,7 +12,8 @@ private val ColorScheme = lightColorScheme(
     primary = Red,
     background = White,
     onBackground = DarkGray,
-    secondary = Gray
+    secondary = Gray,
+    onPrimary = White
 )
 
 val Gilroy = FontFamily(
