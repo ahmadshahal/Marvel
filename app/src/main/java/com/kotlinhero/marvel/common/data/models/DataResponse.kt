@@ -7,6 +7,8 @@ import kotlinx.serialization.Serializable
 data class DataResponse<T>(
     @SerialName("status")
     val status: String,
+    @SerialName("code")
+    val code: Int,
     @SerialName("data")
     val data: T,
 )
