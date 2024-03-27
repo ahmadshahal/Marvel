@@ -1,4 +1,4 @@
-package com.kotlinhero.marvel
+package com.kotlinhero.marvel.main.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
