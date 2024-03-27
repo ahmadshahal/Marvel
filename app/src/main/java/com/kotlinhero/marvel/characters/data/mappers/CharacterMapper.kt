@@ -6,5 +6,5 @@ import com.kotlinhero.marvel.characters.domain.models.Character
 fun CharacterDto.toCharacter() = Character(
     id = id,
     name = name,
-    thumbnail = thumbnail.path + thumbnail.extension
+    thumbnail = thumbnail.path + "." + thumbnail.extension
 )

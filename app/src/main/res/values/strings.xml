@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Marvel</string>
+    <string name="browse_your_favourite_characters">Browse your favourite characters..</string>
+    <string name="welcome_to_the_world_of_excitement">Welcome to the world of excitement!</string>
 </resources>
