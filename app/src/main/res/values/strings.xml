@@ -2,4 +2,5 @@
     <string name="app_name">Marvel</string>
     <string name="browse_your_favourite_characters">Browse your favourite characters..</string>
     <string name="welcome_to_the_world_of_excitement">Welcome to the world of excitement!</string>
+    <string name="your_internet_connection_might_be_having_some_issues">Your internet connection might be having some issues..</string>
 </resources>

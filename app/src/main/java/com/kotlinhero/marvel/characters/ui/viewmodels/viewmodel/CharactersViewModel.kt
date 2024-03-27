@@ -32,7 +32,7 @@ class CharactersViewModel(
                     fetchState = FetchState.Success(it)
                 },
                 onFailure = {
-                    fetchState = FetchState.Error(UiText.DynamicString(it.localizedMessage))
+                    fetchState = FetchState.Error(UiText.DynamicString(it.localizedMessage ?: ""))
                 }
             )
         }

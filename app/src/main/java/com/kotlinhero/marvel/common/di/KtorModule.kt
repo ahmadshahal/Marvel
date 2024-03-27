@@ -1,7 +1,7 @@
 package com.kotlinhero.marvel.common.di
 
 import com.kotlinhero.marvel.common.data.exceptions.ServerException
-import com.kotlinhero.marvel.common.data.models.KtorErrorBody
+import com.kotlinhero.marvel.common.data.models.ErrorResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.android.Android
@@ -37,7 +37,7 @@ val KtorModule = module {
                     * NOTE: This only intercepts failed responses.
                     */
 
-                    val exceptionResponse = clientException.response.body<KtorErrorBody>()
+                    val exceptionResponse = clientException.response.body<ErrorResponse>()
                     throw ServerException(
                         message = exceptionResponse.details.firstOrNull() ?: "",
                         code = clientException.response.status.value

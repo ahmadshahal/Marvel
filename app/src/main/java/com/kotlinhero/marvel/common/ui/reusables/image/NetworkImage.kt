@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import coil.compose.AsyncImage
-import com.kotlinhero.marvel.common.ui.reusables.shimmerBrush
+import com.kotlinhero.marvel.common.ui.reusables.shimmer.shimmerBrush
 
 @Composable
 fun NetworkImage(

@@ -12,7 +12,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
@@ -24,6 +23,7 @@ import androidx.compose.ui.res.painterResource
 import com.kotlinhero.marvel.R
 import com.kotlinhero.marvel.characters.ui.components.CharactersLazyGrid
 import com.kotlinhero.marvel.characters.ui.viewmodels.viewmodel.CharactersViewModel
+import com.kotlinhero.marvel.common.ui.reusables.error.ErrorBox
 import com.kotlinhero.marvel.common.ui.states.FetchState
 import org.koin.androidx.compose.koinViewModel
 
@@ -32,14 +32,17 @@ import org.koin.androidx.compose.koinViewModel
 fun CharactersScreen(viewModel: CharactersViewModel = koinViewModel()) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     Scaffold(
-        modifier = Modifier.fillMaxSize().nestedScroll(scrollBehavior.nestedScrollConnection),
+        modifier = Modifier
+            .fillMaxSize()
+            .nestedScroll(scrollBehavior.nestedScrollConnection),
         containerColor = MaterialTheme.colorScheme.background,
         topBar = { CharactersTopBar(scrollBehavior) }
     ) { paddingValues ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues), contentAlignment = Alignment.Center
+                .padding(paddingValues),
+            contentAlignment = Alignment.Center
         ) {
             AnimatedContent(
                 contentAlignment = Alignment.Center,
@@ -48,7 +51,7 @@ fun CharactersScreen(viewModel: CharactersViewModel = koinViewModel()) {
             ) {
                 when (it) {
                     is FetchState.Loading -> CircularProgressIndicator(strokeCap = StrokeCap.Round)
-                    is FetchState.Error -> Text(text = "Error")
+                    is FetchState.Error -> ErrorBox(onClickTryAgain = viewModel::getCharacters)
                     is FetchState.Success -> CharactersLazyGrid(
                         characters = viewModel.characters,
                         onClickCharacter = {}

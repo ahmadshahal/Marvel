@@ -1,4 +1,4 @@
-package com.kotlinhero.marvel.common.ui.reusables
+package com.kotlinhero.marvel.common.ui.reusables.shimmer
 
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
