@@ -1,4 +1,4 @@
-package com.kotlinhero.marvel.characters.domain.models
+package com.kotlinhero.marvel.characters.domain.entities
 
 data class Character(
     val id: Int,

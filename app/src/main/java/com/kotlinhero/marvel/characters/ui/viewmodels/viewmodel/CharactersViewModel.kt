@@ -6,7 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kotlinhero.marvel.characters.domain.models.Character
+import com.kotlinhero.marvel.characters.domain.entities.Character
 import com.kotlinhero.marvel.characters.domain.usecases.GetCharactersUseCase
 import com.kotlinhero.marvel.common.ui.states.FetchState
 import com.kotlinhero.marvel.common.utils.UiText

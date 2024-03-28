@@ -29,7 +29,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kotlinhero.marvel.R
-import com.kotlinhero.marvel.characters.domain.models.Character
+import com.kotlinhero.marvel.characters.domain.entities.Character
 import com.kotlinhero.marvel.common.ui.reusables.image.NetworkImage
 
 @Composable
