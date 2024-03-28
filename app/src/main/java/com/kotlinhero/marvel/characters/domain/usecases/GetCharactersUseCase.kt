@@ -5,5 +5,5 @@ import com.kotlinhero.marvel.characters.domain.repositories.CharactersRemoteRepo
 class GetCharactersUseCase(
     private val charactersRemoteRepository: CharactersRemoteRepository
 ) {
-    suspend operator fun invoke() = charactersRemoteRepository.getCharacters()
+    suspend operator fun invoke() = charactersRemoteRepository.getCharactersPagingFlow()
 }

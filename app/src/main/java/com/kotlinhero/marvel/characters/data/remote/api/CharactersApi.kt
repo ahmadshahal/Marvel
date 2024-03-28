@@ -6,10 +6,14 @@ import com.kotlinhero.marvel.network.data.models.PaginationResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
+import io.ktor.client.request.parameter
 
 class CharactersApi(private val httpClient: HttpClient) {
-    suspend fun getCharacters(): List<CharacterDto> {
-        return httpClient.get("characters")
+    suspend fun getCharacters(skip: Int = 0, limit: Int = 20): List<CharacterDto> {
+        return httpClient.get("characters") {
+            parameter("limit", limit)
+            parameter("offset", skip)
+        }
             .body<DataResponse<PaginationResponse<CharacterDto>>>()
             .data
             .results

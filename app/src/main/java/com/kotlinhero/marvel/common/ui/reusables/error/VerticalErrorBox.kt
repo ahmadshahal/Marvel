@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -23,17 +24,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kotlinhero.marvel.R
-import com.kotlinhero.marvel.common.ui.reusables.buttons.DefaultButton
+import com.kotlinhero.marvel.common.ui.reusables.buttons.OutlinedButton
 
 @Composable
-fun ErrorBox(
+fun VerticalErrorBox(
     modifier: Modifier = Modifier,
     onClickTryAgain: () -> Unit,
     message: String = stringResource(R.string.your_internet_connection_might_be_having_some_issues)
 ) {
     Column(
         modifier = modifier
-            .padding(36.dp)
+            .fillMaxWidth()
+            .padding(24.dp)
             .clip(RoundedCornerShape(24.dp))
             .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.15F))
             .padding(24.dp),
@@ -46,20 +48,19 @@ fun ErrorBox(
             contentDescription = null,
             tint = MaterialTheme.colorScheme.primary
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = message,
             fontWeight = FontWeight.Medium,
             color = MaterialTheme.colorScheme.onBackground,
-            fontSize = 16.sp,
+            fontSize = 15.sp,
             textAlign = TextAlign.Center
         )
-        Spacer(modifier = Modifier.height(24.dp))
-        DefaultButton(onClick = onClickTryAgain) {
+        Spacer(modifier = Modifier.height(16.dp))
+        OutlinedButton(modifier = Modifier.height(48.dp), onClick = onClickTryAgain) {
             Text(
-                text = "Try Again",
-                fontWeight = FontWeight.Medium,
-                fontSize = 16.sp,
+                text = stringResource(id = R.string.retry),
+                fontSize = 14.sp,
             )
         }
     }

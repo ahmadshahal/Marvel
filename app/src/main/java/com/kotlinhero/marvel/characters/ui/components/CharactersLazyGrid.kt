@@ -1,5 +1,6 @@
 package com.kotlinhero.marvel.characters.ui.components
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -15,8 +16,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,19 +26,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.paging.LoadState
+import androidx.paging.compose.LazyPagingItems
 import com.kotlinhero.marvel.R
 import com.kotlinhero.marvel.characters.domain.entities.Character
+import com.kotlinhero.marvel.common.ui.reusables.error.HorizontalErrorBox
+import com.kotlinhero.marvel.common.ui.reusables.error.VerticalErrorBox
 import com.kotlinhero.marvel.common.ui.reusables.image.NetworkImage
 
 @Composable
 fun CharactersLazyGrid(
     modifier: Modifier = Modifier,
-    characters: List<Character>,
+    characterPagingItems: LazyPagingItems<Character>,
     onClickCharacter: (Int) -> Unit,
 ) {
     LazyVerticalGrid(
@@ -45,7 +51,7 @@ fun CharactersLazyGrid(
         columns = GridCells.Fixed(2),
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
-        contentPadding = PaddingValues(top = 8.dp, start = 24.dp, end = 24.dp, bottom = 24.dp),
+        contentPadding = PaddingValues(top = 8.dp, start = 24.dp, end = 24.dp, bottom = 8.dp),
     ) {
         item(span = { GridItemSpan(2) }) {
             Column {
@@ -95,16 +101,85 @@ fun CharactersLazyGrid(
                 )
             }
         }
-        items(characters) {
+        items(characterPagingItems.itemCount) { index ->
+            val character = characterPagingItems[index]!!
             CharacterItem(
-                name = it.name,
-                thumbnail = it.thumbnail,
-                onClick = { onClickCharacter(it.id) }
+                name = character.name,
+                thumbnail = character.thumbnail,
+                onClick = { onClickCharacter(character.id) }
             )
+        }
+        item(span = { GridItemSpan(2) }) {
+            AnimatedContent(targetState = characterPagingItems.loadState, label = "") {
+                when {
+                    it.refresh is LoadState.Loading -> RefreshLoadingBox()
+                    it.refresh is LoadState.Error -> {
+                        val error = characterPagingItems.loadState.refresh as LoadState.Error
+                        RefreshErrorBox(
+                            message = error.error.localizedMessage ?: "",
+                            onClickTryAgain = characterPagingItems::retry
+                        )
+                    }
+                    it.append is LoadState.Loading -> AppendLoadingBox()
+                    it.append is LoadState.Error -> {
+                        val error = characterPagingItems.loadState.append as LoadState.Error
+                        AppendErrorBox(
+                            message = error.error.localizedMessage ?: "",
+                            onClickTryAgain = characterPagingItems::retry
+                        )
+                    }
+                }
+            }
         }
     }
 }
 
+@Composable
+private fun RefreshLoadingBox(modifier: Modifier = Modifier) {
+    Box(modifier = modifier, contentAlignment = Alignment.Center) {
+        CircularProgressIndicator(
+            modifier = Modifier.size(24.dp),
+            strokeCap = StrokeCap.Round,
+        )
+    }
+}
+
+@Composable
+private fun AppendLoadingBox(modifier: Modifier = Modifier) {
+    Box(modifier = modifier, contentAlignment = Alignment.Center) {
+        CircularProgressIndicator(
+            modifier = Modifier.size(20.dp),
+            strokeCap = StrokeCap.Round,
+            strokeWidth = 3.dp
+        )
+    }
+}
+
+@Composable
+private fun RefreshErrorBox(
+    modifier: Modifier = Modifier,
+    message: String,
+    onClickTryAgain: () -> Unit,
+) {
+    VerticalErrorBox(
+        modifier = modifier,
+        message = message,
+        onClickTryAgain = onClickTryAgain
+    )
+}
+
+@Composable
+private fun AppendErrorBox(
+    modifier: Modifier = Modifier,
+    message: String,
+    onClickTryAgain: () -> Unit,
+) {
+    HorizontalErrorBox(
+        modifier = modifier,
+        message = message,
+        onClickTryAgain = onClickTryAgain
+    )
+}
 
 @Composable
 private fun CharacterItem(

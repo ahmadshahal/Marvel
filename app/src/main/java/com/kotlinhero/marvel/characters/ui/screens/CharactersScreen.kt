@@ -1,12 +1,9 @@
 package com.kotlinhero.marvel.characters.ui.screens
 
-import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -15,25 +12,22 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.kotlinhero.marvel.R
+import com.kotlinhero.marvel.characters.domain.entities.Character
 import com.kotlinhero.marvel.characters.ui.components.CharactersLazyGrid
 import com.kotlinhero.marvel.characters.ui.viewmodels.viewmodel.CharactersViewModel
-import com.kotlinhero.marvel.common.ui.reusables.error.ErrorBox
-import com.kotlinhero.marvel.common.ui.states.FetchState
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CharactersScreen(viewModel: CharactersViewModel = koinViewModel()) {
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
-        // TODO: Find a solution for this..
-        canScroll = { viewModel.fetchState is FetchState.Success },
-    )
+    val characterPagingItems: LazyPagingItems<Character> = viewModel.charactersState.collectAsLazyPagingItems()
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
@@ -41,28 +35,11 @@ fun CharactersScreen(viewModel: CharactersViewModel = koinViewModel()) {
         containerColor = MaterialTheme.colorScheme.background,
         topBar = { CharactersTopBar(scrollBehavior) }
     ) { paddingValues ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues),
-            contentAlignment = Alignment.Center
-        ) {
-            AnimatedContent(
-                contentAlignment = Alignment.Center,
-                targetState = viewModel.fetchState,
-                label = ""
-            ) {
-                when (it) {
-                    is FetchState.Loading -> CircularProgressIndicator(strokeCap = StrokeCap.Round)
-                    is FetchState.Error -> ErrorBox(onClickTryAgain = viewModel::getCharacters)
-                    is FetchState.Success -> CharactersLazyGrid(
-                        characters = viewModel.characters,
-                        onClickCharacter = {}
-                    )
-                    else -> Unit
-                }
-            }
-        }
+        CharactersLazyGrid(
+            modifier = Modifier.fillMaxSize().padding(paddingValues),
+            characterPagingItems = characterPagingItems,
+            onClickCharacter = {}
+        )
     }
 }
 
