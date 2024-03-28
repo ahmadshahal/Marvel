@@ -54,7 +54,7 @@ fun CharactersLazyGrid(
         columns = GridCells.Fixed(2),
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
-        contentPadding = PaddingValues(top = 8.dp, start = 24.dp, end = 24.dp, bottom = 8.dp),
+        contentPadding = PaddingValues(top = 8.dp, start = 24.dp, end = 24.dp, bottom = 24.dp),
     ) {
         item(span = { GridItemSpan(2) }) {
             Column {

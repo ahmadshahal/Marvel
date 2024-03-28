@@ -29,7 +29,7 @@ fun DefaultButton(
     Button(
         onClick = onClick,
         modifier = modifier.widthIn(min = 130.dp).height(50.dp),
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(24.dp),
         elevation = ButtonDefaults.buttonElevation(
             defaultElevation = 0.dp,
             disabledElevation = 0.dp,

@@ -61,7 +61,7 @@ fun CharactersScreen(viewModel: CharactersViewModel = koinViewModel()) {
     val coroutineScope = rememberCoroutineScope()
     val lazyGridState = rememberLazyGridState()
     val showScrollToTopButton by remember {
-        derivedStateOf { lazyGridState.firstVisibleItemIndex > 4 }
+        derivedStateOf { lazyGridState.firstVisibleItemIndex > 2 }
     }
     val navController = LocalNavController.current
     val characterPagingItems: LazyPagingItems<Character> =

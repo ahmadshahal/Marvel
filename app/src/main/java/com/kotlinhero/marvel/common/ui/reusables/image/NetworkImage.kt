@@ -23,6 +23,7 @@ import com.kotlinhero.marvel.common.ui.reusables.shimmer.shimmerBrush
 @Composable
 fun NetworkImage(
     modifier: Modifier = Modifier,
+    showShimmer: Boolean = true,
     colorFilter: ColorFilter? = null,
     contentScale: ContentScale = ContentScale.Crop,
     url: String,
@@ -42,7 +43,7 @@ fun NetworkImage(
         )
         val shimmerBrush = shimmerBrush()
         AnimatedVisibility(
-            visible = loading,
+            visible = loading && showShimmer,
             label = "",
             enter = fadeIn(),
             exit = fadeOut()

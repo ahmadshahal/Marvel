@@ -5,4 +5,5 @@
     <string name="your_internet_connection_might_be_having_some_issues">Your internet connection might be having some issues..</string>
     <string name="try_again">Try Again</string>
     <string name="retry">Retry</string>
+    <string name="loading">Loading..</string>
 </resources>
