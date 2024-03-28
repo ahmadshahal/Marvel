@@ -27,7 +27,7 @@ import kotlinx.serialization.json.Json
 import org.koin.dsl.module
 import timber.log.Timber
 
-val KtorModule = module {
+val NetworkModule = module {
     single {
         HttpClient(Android) {
             expectSuccess = true

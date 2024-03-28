@@ -12,13 +12,16 @@ import androidx.compose.ui.graphics.Color
 import com.kotlinhero.marvel.common.ui.theme.DarkGray
 
 @Composable
-fun shimmerBrush(showShimmer: Boolean = true, targetValue:Float = 1000f): Brush {
+fun shimmerBrush(
+    showShimmer: Boolean = true,
+    targetValue:Float = 1000f,
+    colors: List<Color> = listOf(
+        DarkGray.copy(alpha = 0.3f),
+        DarkGray.copy(alpha = 0.1f),
+        DarkGray.copy(alpha = 0.3f),
+    )
+): Brush {
     return if (showShimmer) {
-        val shimmerColors = listOf(
-            DarkGray.copy(alpha = 0.3f),
-            DarkGray.copy(alpha = 0.1f),
-            DarkGray.copy(alpha = 0.3f),
-        )
         val transition = rememberInfiniteTransition(label = "")
         val translateAnimation = transition.animateFloat(
             initialValue = 0f,
@@ -29,7 +32,7 @@ fun shimmerBrush(showShimmer: Boolean = true, targetValue:Float = 1000f): Brush 
             label = ""
         )
         Brush.linearGradient(
-            colors = shimmerColors,
+            colors = colors,
             start = Offset.Zero,
             end = Offset(x = translateAnimation.value, y = translateAnimation.value)
         )
