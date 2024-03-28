@@ -78,28 +78,28 @@ fun CharactersLazyGrid(
         item(span = { GridItemSpan(2) }) {
             Row(horizontalArrangement = Arrangement.SpaceBetween) {
                 Image(
-                    modifier = Modifier.size(64.dp),
-                    painter = painterResource(id = R.drawable.hero_category),
+                    modifier = Modifier.size(56.dp),
+                    painter = painterResource(id = R.drawable.ic_hero_category),
                     contentDescription = null
                 )
                 Image(
-                    modifier = Modifier.size(64.dp),
-                    painter = painterResource(id = R.drawable.villain_category),
+                    modifier = Modifier.size(56.dp),
+                    painter = painterResource(id = R.drawable.ic_villian_category),
                     contentDescription = null
                 )
                 Image(
-                    modifier = Modifier.size(64.dp),
-                    painter = painterResource(id = R.drawable.alien_category),
+                    modifier = Modifier.size(56.dp),
+                    painter = painterResource(id = R.drawable.ic_alien_category),
                     contentDescription = null
                 )
                 Image(
-                    modifier = Modifier.size(64.dp),
-                    painter = painterResource(id = R.drawable.antihero_category),
+                    modifier = Modifier.size(56.dp),
+                    painter = painterResource(id = R.drawable.ic_antihero_category),
                     contentDescription = null
                 )
                 Image(
-                    modifier = Modifier.size(64.dp),
-                    painter = painterResource(id = R.drawable.human_category),
+                    modifier = Modifier.size(56.dp),
+                    painter = painterResource(id = R.drawable.ic_human_category),
                     contentDescription = null
                 )
             }
