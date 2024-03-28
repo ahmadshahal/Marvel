@@ -28,8 +28,8 @@ class CharactersApi(private val httpClient: HttpClient) {
             .first()
     }
 
-    suspend fun getComics(id: Int): List<ComicDto> {
-        return httpClient.get("characters/$id/comics") {
+    suspend fun getComics(characterId: Int): List<ComicDto> {
+        return httpClient.get("characters/$characterId/comics") {
             parameter("limit", 3)
             parameter("offset", 0)
         }

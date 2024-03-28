@@ -10,7 +10,7 @@ interface CharactersRepository {
 
     suspend fun getCharacters(): Result<List<Character>>
 
-    suspend fun getComics(id: Int): Result<List<Comic>>
+    suspend fun getComics(characterId: Int): Result<List<Comic>>
 
     suspend fun getCharactersPagingFlow(): Flow<PagingData<Character>>
 }

@@ -26,8 +26,8 @@ class CharactersRepositoryImpl(
         charactersApi.getCharacters().map { it.toCharacter() }
     }
 
-    override suspend fun getComics(id: Int) = runCatching {
-        charactersApi.getComics(id).map { it.toComic() }
+    override suspend fun getComics(characterId: Int) = runCatching {
+        charactersApi.getComics(characterId).map { it.toComic() }
     }
 
     override suspend fun getCharactersPagingFlow(): Flow<PagingData<Character>> {
