@@ -17,6 +17,10 @@ import kotlinx.coroutines.flow.map
 class CharactersRepositoryImpl(
     private val charactersApi: CharactersApi
 ) : BaseRemoteRepository(), CharactersRepository {
+    override suspend fun getCharacter(id: Int) = runCatching {
+        charactersApi.getCharacter(id).toCharacter()
+    }
+
     override suspend fun getCharacters() = runCatching {
         charactersApi.getCharacters().map { it.toCharacter() }
     }

@@ -18,4 +18,12 @@ class CharactersApi(private val httpClient: HttpClient) {
             .data
             .results
     }
+
+    suspend fun getCharacter(id: Int): CharacterDto {
+        return httpClient.get("characters/$id")
+            .body<DataResponse<PaginationResponse<CharacterDto>>>()
+            .data
+            .results
+            .first()
+    }
 }
