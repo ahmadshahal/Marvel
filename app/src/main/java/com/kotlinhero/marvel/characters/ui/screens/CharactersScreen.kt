@@ -30,7 +30,10 @@ import org.koin.androidx.compose.koinViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CharactersScreen(viewModel: CharactersViewModel = koinViewModel()) {
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
+        // TODO: Find a solution for this..
+        canScroll = { viewModel.fetchState is FetchState.Success },
+    )
     Scaffold(
         modifier = Modifier
             .fillMaxSize()

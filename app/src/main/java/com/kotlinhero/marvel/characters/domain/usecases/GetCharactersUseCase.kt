@@ -6,7 +6,6 @@ class GetCharactersUseCase(
     private val charactersRemoteRepository: CharactersRemoteRepository
 ) {
     suspend operator fun invoke() = runCatching {
-        throw Exception()
         charactersRemoteRepository.getCharacters()
     }
 }

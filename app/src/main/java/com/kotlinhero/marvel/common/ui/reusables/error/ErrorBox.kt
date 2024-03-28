@@ -33,7 +33,7 @@ fun ErrorBox(
 ) {
     Column(
         modifier = modifier
-            .padding(24.dp)
+            .padding(36.dp)
             .clip(RoundedCornerShape(24.dp))
             .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.15F))
             .padding(24.dp),
