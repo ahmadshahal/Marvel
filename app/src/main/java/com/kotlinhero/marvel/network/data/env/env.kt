@@ -1,4 +1,4 @@
-package com.kotlinhero.marvel.common.data.env
+package com.kotlinhero.marvel.network.data.env
 
 import com.kotlinhero.marvel.common.utils.md5Hash
 

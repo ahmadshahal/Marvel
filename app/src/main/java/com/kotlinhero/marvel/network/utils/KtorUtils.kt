@@ -1,4 +1,4 @@
-package com.kotlinhero.marvel.common.utils
+package com.kotlinhero.marvel.network.utils
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body

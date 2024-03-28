@@ -1,4 +1,4 @@
-package com.kotlinhero.marvel.common.data.models
+package com.kotlinhero.marvel.network.data.models
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

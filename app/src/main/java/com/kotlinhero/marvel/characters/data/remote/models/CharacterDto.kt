@@ -1,6 +1,6 @@
 package com.kotlinhero.marvel.characters.data.remote.models
 
-import com.kotlinhero.marvel.common.data.models.ThumbnailDto
+import com.kotlinhero.marvel.network.data.models.ThumbnailDto
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

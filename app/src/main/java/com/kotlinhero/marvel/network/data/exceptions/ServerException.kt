@@ -1,4 +1,4 @@
-package com.kotlinhero.marvel.common.data.exceptions
+package com.kotlinhero.marvel.network.data.exceptions
 
 data class ServerException(
     override val message: String,

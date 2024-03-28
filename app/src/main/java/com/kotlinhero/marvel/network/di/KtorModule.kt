@@ -1,7 +1,7 @@
-package com.kotlinhero.marvel.common.di
+package com.kotlinhero.marvel.network.di
 
-import com.kotlinhero.marvel.common.data.exceptions.ServerException
-import com.kotlinhero.marvel.common.data.models.ErrorResponse
+import com.kotlinhero.marvel.network.data.exceptions.ServerException
+import com.kotlinhero.marvel.network.data.models.ErrorResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.android.Android

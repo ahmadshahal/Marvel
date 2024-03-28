@@ -1,12 +1,12 @@
 package com.kotlinhero.marvel.characters.data.remote.api
 
 import com.kotlinhero.marvel.characters.data.remote.models.CharacterDto
-import com.kotlinhero.marvel.common.data.env.DEV_ROUTE
-import com.kotlinhero.marvel.common.data.env.PUBLIC_API_KEY
-import com.kotlinhero.marvel.common.data.env.generateApiHash
-import com.kotlinhero.marvel.common.data.env.generateTimeStamp
-import com.kotlinhero.marvel.common.data.models.DataResponse
-import com.kotlinhero.marvel.common.data.models.PaginationResponse
+import com.kotlinhero.marvel.network.data.env.DEV_ROUTE
+import com.kotlinhero.marvel.network.data.env.PUBLIC_API_KEY
+import com.kotlinhero.marvel.network.data.env.generateApiHash
+import com.kotlinhero.marvel.network.data.env.generateTimeStamp
+import com.kotlinhero.marvel.network.data.models.DataResponse
+import com.kotlinhero.marvel.network.data.models.PaginationResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
