@@ -32,7 +32,7 @@ import com.kotlinhero.marvel.R
 import com.kotlinhero.marvel.characters.domain.entities.Character
 import com.kotlinhero.marvel.characters.ui.components.CharactersLazyGrid
 import com.kotlinhero.marvel.characters.ui.viewmodels.viewmodel.CharactersViewModel
-import com.kotlinhero.marvel.common.ui.reusables.buttons.ScrollToTopButton
+import com.kotlinhero.marvel.common.ui.reusables.buttons.BackToTopButton
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
@@ -72,7 +72,7 @@ fun CharactersScreen(viewModel: CharactersViewModel = koinViewModel()) {
                 enter = slideInVertically { -it * 2 },
                 exit = slideOutVertically { -it * 2 },
             ) {
-                ScrollToTopButton(
+                BackToTopButton(
                     onClick = {
                         coroutineScope.launch {
                             lazyGridState.animateScrollToItem(0)

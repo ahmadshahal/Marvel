@@ -17,7 +17,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ScrollToTopButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
+fun BackToTopButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
     Box(
         modifier = modifier
             .shadow(10.dp, shape = CircleShape)

@@ -117,7 +117,7 @@ fun CharactersLazyGrid(
                 when {
                     it.refresh is LoadState.Loading -> RefreshLoadingBox()
                     it.refresh is LoadState.Error -> {
-                        val error = characterPagingItems.loadState.refresh as LoadState.Error
+                        val error = it.refresh as LoadState.Error
                         RefreshErrorBox(
                             message = error.error.localizedMessage ?: "",
                             onClickTryAgain = characterPagingItems::retry
@@ -125,7 +125,7 @@ fun CharactersLazyGrid(
                     }
                     it.append is LoadState.Loading -> AppendLoadingBox()
                     it.append is LoadState.Error -> {
-                        val error = characterPagingItems.loadState.append as LoadState.Error
+                        val error = it.append as LoadState.Error
                         AppendErrorBox(
                             message = error.error.localizedMessage ?: "",
                             onClickTryAgain = characterPagingItems::retry
