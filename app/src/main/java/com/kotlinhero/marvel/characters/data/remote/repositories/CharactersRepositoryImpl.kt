@@ -8,15 +8,15 @@ import com.kotlinhero.marvel.characters.data.mappers.toCharacter
 import com.kotlinhero.marvel.characters.data.remote.api.CharactersApi
 import com.kotlinhero.marvel.characters.data.remote.paging.CharactersPagingSource
 import com.kotlinhero.marvel.characters.domain.entities.Character
-import com.kotlinhero.marvel.characters.domain.repositories.CharactersRemoteRepository
+import com.kotlinhero.marvel.characters.domain.repositories.CharactersRepository
 import com.kotlinhero.marvel.common.NETWORK_PAGE_SIZE
 import com.kotlinhero.marvel.common.repositories.BaseRemoteRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class CharactersRemoteRepositoryImpl(
+class CharactersRepositoryImpl(
     private val charactersApi: CharactersApi
-) : BaseRemoteRepository(), CharactersRemoteRepository {
+) : BaseRemoteRepository(), CharactersRepository {
     override suspend fun getCharacters() = runCatching {
         charactersApi.getCharacters().map { it.toCharacter() }
     }
