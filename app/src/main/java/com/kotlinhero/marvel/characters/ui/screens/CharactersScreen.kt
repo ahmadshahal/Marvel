@@ -31,7 +31,9 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.kotlinhero.marvel.R
 import com.kotlinhero.marvel.characters.domain.entities.Character
 import com.kotlinhero.marvel.characters.ui.components.CharactersLazyGrid
-import com.kotlinhero.marvel.characters.ui.viewmodels.viewmodel.CharactersViewModel
+import com.kotlinhero.marvel.characters.ui.viewmodels.CharactersViewModel
+import com.kotlinhero.marvel.common.ui.navigation.Destination
+import com.kotlinhero.marvel.common.ui.providers.LocalNavController
 import com.kotlinhero.marvel.common.ui.reusables.buttons.BackToTopButton
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
@@ -45,6 +47,7 @@ fun CharactersScreen(viewModel: CharactersViewModel = koinViewModel()) {
     val showScrollToTopButton by remember {
         derivedStateOf { lazyGridState.firstVisibleItemIndex > 4 }
     }
+    val navController = LocalNavController.current
     val characterPagingItems: LazyPagingItems<Character> =
         viewModel.charactersState.collectAsLazyPagingItems()
     Scaffold(
@@ -61,7 +64,9 @@ fun CharactersScreen(viewModel: CharactersViewModel = koinViewModel()) {
         ) {
             CharactersLazyGrid(
                 characterPagingItems = characterPagingItems,
-                onClickCharacter = {},
+                onClickCharacter = {
+                    navController.navigate(Destination.CharacterDetailsScreen.route + "/$it")
+                },
                 lazyGridState = lazyGridState
             )
             AnimatedVisibility(

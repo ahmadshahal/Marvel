@@ -13,7 +13,10 @@ private val ColorScheme = lightColorScheme(
     background = White,
     onBackground = DarkGray,
     secondary = Gray,
-    onPrimary = White
+    onPrimary = White,
+    surface = White,
+    onSurface = DarkGray,
+    surfaceContainer = DarkGray
 )
 
 val Gilroy = FontFamily(

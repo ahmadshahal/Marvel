@@ -1,4 +1,4 @@
-package com.kotlinhero.marvel.characters.ui.viewmodels.viewmodel
+package com.kotlinhero.marvel.characters.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

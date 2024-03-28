@@ -141,7 +141,7 @@ fun CharactersLazyGrid(
 private fun RefreshLoadingBox(modifier: Modifier = Modifier) {
     Box(modifier = modifier, contentAlignment = Alignment.Center) {
         CircularProgressIndicator(
-            modifier = Modifier.size(24.dp),
+            modifier = Modifier.size(30.dp),
             strokeCap = StrokeCap.Round,
         )
     }
