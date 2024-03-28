@@ -7,6 +7,6 @@ import kotlinx.serialization.Serializable
 data class ErrorResponse(
     @SerialName("message")
     val message: String,
-    @SerialName("errors")
-    val details: List<String>
+    @SerialName("code")
+    val code: String
 )

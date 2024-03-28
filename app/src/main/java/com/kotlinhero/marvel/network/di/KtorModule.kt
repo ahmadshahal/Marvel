@@ -1,5 +1,10 @@
 package com.kotlinhero.marvel.network.di
 
+import com.kotlinhero.marvel.common.utils.generateTimestamp
+import com.kotlinhero.marvel.network.data.env.HOST
+import com.kotlinhero.marvel.network.data.env.PATH
+import com.kotlinhero.marvel.network.data.env.PUBLIC_API_KEY
+import com.kotlinhero.marvel.network.data.env.generateApiHash
 import com.kotlinhero.marvel.network.data.exceptions.ServerException
 import com.kotlinhero.marvel.network.data.models.ErrorResponse
 import io.ktor.client.HttpClient
@@ -15,6 +20,8 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.header
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
+import io.ktor.http.URLProtocol
+import io.ktor.http.path
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.dsl.module
@@ -36,11 +43,10 @@ val KtorModule = module {
                     /*
                     * NOTE: This only intercepts failed responses.
                     */
-
                     val exceptionResponse = clientException.response.body<ErrorResponse>()
                     throw ServerException(
-                        message = exceptionResponse.details.firstOrNull() ?: "",
-                        code = clientException.response.status.value
+                        message = exceptionResponse.message,
+                        code = exceptionResponse.code
                     )
                 }
             }
@@ -71,6 +77,15 @@ val KtorModule = module {
 
             install(DefaultRequest) {
                 header(HttpHeaders.ContentType, ContentType.Application.Json)
+                url {
+                    protocol = URLProtocol.HTTPS
+                    host = HOST
+                    path(PATH)
+                    val timestamp = generateTimestamp()
+                    parameters.append("ts", timestamp)
+                    parameters.append("apikey", PUBLIC_API_KEY)
+                    parameters.append("hash", generateApiHash(timestamp))
+                }
             }
 
             /*

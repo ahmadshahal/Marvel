@@ -1,6 +1,6 @@
 package com.kotlinhero.marvel.characters.data.remote.models
 
-import com.kotlinhero.marvel.network.data.models.ThumbnailDto
+import com.kotlinhero.marvel.network.data.models.ThumbnailResponse
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -11,5 +11,5 @@ data class CharacterDto(
     @SerialName("name")
     val name: String,
     @SerialName("thumbnail")
-    val thumbnail: ThumbnailDto
+    val thumbnail: ThumbnailResponse
 )

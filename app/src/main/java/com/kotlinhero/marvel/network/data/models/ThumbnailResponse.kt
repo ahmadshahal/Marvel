@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ThumbnailDto(
+data class ThumbnailResponse(
     @SerialName("path")
     val path: String,
     @SerialName("extension")
