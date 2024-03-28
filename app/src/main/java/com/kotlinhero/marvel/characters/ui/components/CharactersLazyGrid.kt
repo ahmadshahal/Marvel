@@ -139,9 +139,9 @@ fun CharactersLazyGrid(
 
 @Composable
 private fun RefreshLoadingBox(modifier: Modifier = Modifier) {
-    Box(modifier = modifier, contentAlignment = Alignment.Center) {
+    Box(modifier = modifier.height(200.dp), contentAlignment = Alignment.Center) {
         CircularProgressIndicator(
-            modifier = Modifier.size(30.dp),
+            modifier = Modifier.size(32.dp),
             strokeCap = StrokeCap.Round,
         )
     }

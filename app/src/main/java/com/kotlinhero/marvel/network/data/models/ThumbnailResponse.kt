@@ -9,4 +9,6 @@ data class ThumbnailResponse(
     val path: String,
     @SerialName("extension")
     val extension: String
-)
+) {
+    val fullPath get() = "$path.$extension"
+}

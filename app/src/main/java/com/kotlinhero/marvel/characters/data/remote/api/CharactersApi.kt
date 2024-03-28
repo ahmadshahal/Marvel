@@ -1,6 +1,7 @@
 package com.kotlinhero.marvel.characters.data.remote.api
 
 import com.kotlinhero.marvel.characters.data.remote.models.CharacterDto
+import com.kotlinhero.marvel.characters.data.remote.models.ComicDto
 import com.kotlinhero.marvel.network.data.models.DataResponse
 import com.kotlinhero.marvel.network.data.models.PaginationResponse
 import io.ktor.client.HttpClient
@@ -25,5 +26,15 @@ class CharactersApi(private val httpClient: HttpClient) {
             .data
             .results
             .first()
+    }
+
+    suspend fun getComics(id: Int): List<ComicDto> {
+        return httpClient.get("characters/$id/comics") {
+            parameter("limit", 3)
+            parameter("offset", 0)
+        }
+            .body<DataResponse<PaginationResponse<ComicDto>>>()
+            .data
+            .results
     }
 }

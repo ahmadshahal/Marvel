@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
@@ -42,6 +43,7 @@ import androidx.compose.ui.unit.sp
 import com.kotlinhero.marvel.R
 import com.kotlinhero.marvel.characters.domain.entities.Character
 import com.kotlinhero.marvel.characters.ui.components.CharacterAttributes
+import com.kotlinhero.marvel.characters.ui.components.ComicsLazyRow
 import com.kotlinhero.marvel.characters.ui.viewmodels.CharacterDetailsViewModel
 import com.kotlinhero.marvel.common.ui.providers.LocalNavController
 import com.kotlinhero.marvel.common.ui.reusables.error.NetflixErrorBox
@@ -75,7 +77,7 @@ fun CharacterDetailsScreen(viewModel: CharacterDetailsViewModel = koinViewModel(
             contentAlignment = Alignment.Center
         ) {
             AnimatedContent(
-                targetState = viewModel.characterFetchState,
+                targetState = viewModel.totalFetchState,
                 contentAlignment = Alignment.Center,
                 label = "",
                 transitionSpec = { fadeIn() togetherWith fadeOut() }
@@ -83,15 +85,24 @@ fun CharacterDetailsScreen(viewModel: CharacterDetailsViewModel = koinViewModel(
                 when (val fetchState = it) {
                     is FetchState.Error -> NetflixErrorBox(
                         modifier = Modifier.padding(horizontal = 24.dp),
-                        onClickTryAgain = viewModel::getCharacter
+                        message = fetchState.message.asString(),
+                        onClickTryAgain = viewModel::refresh
                     )
                     is FetchState.Success -> {
-                        val character = fetchState.data ?: Character()
+                        val character = viewModel.characterDetailsState.characterFetchState.data ?: Character()
                         CharacterBackground(thumbnail = character.thumbnail)
-                        CharacterDetails(
-                            modifier = Modifier.padding(horizontal = 24.dp),
-                            character = character
-                        )
+                        Column(
+                            modifier = Modifier.fillMaxSize(),
+                            verticalArrangement = Arrangement.Bottom
+                        ) {
+                            CharacterDetails(
+                                modifier = Modifier.padding(horizontal = 24.dp),
+                                character = character
+                            )
+                            Spacer(modifier = Modifier.height(16.dp))
+                            val comics = viewModel.characterDetailsState.comicsFetchState.data ?: emptyList()
+                            ComicsLazyRow(comics = comics)
+                        }
                     }
                     else -> NetflixLoadingBox()
                 }
@@ -123,13 +134,8 @@ private fun BoxScope.CharacterBackground(thumbnail: String) {
 }
 
 @Composable
-private fun CharacterDetails(modifier: Modifier = Modifier, character: Character) {
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(bottom = 32.dp),
-        verticalArrangement = Arrangement.Bottom
-    ) {
+private fun ColumnScope.CharacterDetails(modifier: Modifier = Modifier, character: Character) {
+    Column(modifier = modifier) {
         Text(
             text = character.name,
             fontSize = 40.sp,

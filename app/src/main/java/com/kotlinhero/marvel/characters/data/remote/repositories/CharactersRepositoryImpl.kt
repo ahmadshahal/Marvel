@@ -5,6 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.kotlinhero.marvel.characters.data.mappers.toCharacter
+import com.kotlinhero.marvel.characters.data.mappers.toComic
 import com.kotlinhero.marvel.characters.data.remote.api.CharactersApi
 import com.kotlinhero.marvel.characters.data.remote.paging.CharactersPagingSource
 import com.kotlinhero.marvel.characters.domain.entities.Character
@@ -23,6 +24,10 @@ class CharactersRepositoryImpl(
 
     override suspend fun getCharacters() = runCatching {
         charactersApi.getCharacters().map { it.toCharacter() }
+    }
+
+    override suspend fun getComics(id: Int) = runCatching {
+        charactersApi.getComics(id).map { it.toComic() }
     }
 
     override suspend fun getCharactersPagingFlow(): Flow<PagingData<Character>> {
