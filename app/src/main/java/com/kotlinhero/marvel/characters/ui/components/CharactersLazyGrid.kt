@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
@@ -44,10 +45,12 @@ import com.kotlinhero.marvel.common.ui.reusables.image.NetworkImage
 fun CharactersLazyGrid(
     modifier: Modifier = Modifier,
     characterPagingItems: LazyPagingItems<Character>,
+    lazyGridState: LazyGridState,
     onClickCharacter: (Int) -> Unit,
 ) {
     LazyVerticalGrid(
         modifier = modifier,
+        state = lazyGridState,
         columns = GridCells.Fixed(2),
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
