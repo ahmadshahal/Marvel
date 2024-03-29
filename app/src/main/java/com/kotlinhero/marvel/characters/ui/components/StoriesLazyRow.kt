@@ -72,7 +72,7 @@ fun StoriesLazyRow(
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 contentPadding = PaddingValues(horizontal = 24.dp),
             ) {
-                items(stories) {
+                items(stories, key = { it.id }) {
                     StoryItem(story = it)
                 }
             }

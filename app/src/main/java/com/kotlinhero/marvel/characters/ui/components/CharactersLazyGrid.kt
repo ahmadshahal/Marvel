@@ -104,7 +104,7 @@ fun CharactersLazyGrid(
                 )
             }
         }
-        items(characterPagingItems.itemCount) { index ->
+        items(characterPagingItems.itemCount, key = { it }) { index ->
             val character = characterPagingItems[index]!!
             CharacterItem(
                 name = character.name,

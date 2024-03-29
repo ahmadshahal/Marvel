@@ -72,7 +72,7 @@ fun SeriesLazyRow(
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 contentPadding = PaddingValues(horizontal = 24.dp),
             ) {
-                items(series) {
+                items(series, key = { it.id }) {
                     SerieItem(serie = it)
                 }
             }

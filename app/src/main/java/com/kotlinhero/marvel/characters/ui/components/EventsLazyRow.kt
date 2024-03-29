@@ -72,7 +72,7 @@ fun EventsLazyRow(
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 contentPadding = PaddingValues(horizontal = 24.dp),
             ) {
-                items(events) {
+                items(events, key = { it.id }) {
                     EventItem(event = it)
                 }
             }
