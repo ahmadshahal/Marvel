@@ -2,8 +2,12 @@ package com.kotlinhero.marvel.characters.domain.mappers
 
 import com.kotlinhero.marvel.characters.data.remote.models.CharacterDto
 import com.kotlinhero.marvel.characters.data.remote.models.ComicDto
+import com.kotlinhero.marvel.characters.data.remote.models.EventDto
 import com.kotlinhero.marvel.characters.domain.entities.Character
 import com.kotlinhero.marvel.characters.domain.entities.Comic
+import com.kotlinhero.marvel.characters.domain.entities.Event
+
+private const val LOREM_IPSUM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
 
 fun CharacterDto.toCharacter() = Character(
     id = id,
@@ -23,4 +27,9 @@ fun ComicDto.toComic() = Comic(
     description = description
 )
 
-private const val LOREM_IPSUM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+fun EventDto.toEvent() = Event(
+    id = id,
+    title = title,
+    thumbnail = thumbnail.fullPath,
+    description = description
+)
