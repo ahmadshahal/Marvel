@@ -9,9 +9,9 @@ data class ComicDto(
     @SerialName("id")
     val id: Int,
     @SerialName("title")
-    val title: String,
+    val title: String?,
     @SerialName("description")
-    val description: String,
+    val description: String?,
     @SerialName("thumbnail")
-    val thumbnail: ThumbnailResponse,
+    val thumbnail: ThumbnailResponse?,
 )

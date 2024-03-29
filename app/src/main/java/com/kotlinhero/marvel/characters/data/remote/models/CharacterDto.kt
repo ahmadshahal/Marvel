@@ -9,9 +9,9 @@ data class CharacterDto(
     @SerialName("id")
     val id: Int,
     @SerialName("name")
-    val name: String,
+    val name: String?,
     @SerialName("description")
-    val description: String,
+    val description: String?,
     @SerialName("thumbnail")
-    val thumbnail: ThumbnailResponse
+    val thumbnail: ThumbnailResponse?
 )

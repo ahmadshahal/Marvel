@@ -57,7 +57,7 @@ fun EventsLazyRow(
             )
             Text(
                 modifier = Modifier.clickable { onProductTypeChange(ProductType.SERIES) },
-                text = stringResource(R.string.view_comics),
+                text = stringResource(R.string.view_series),
                 fontSize = 14.sp,
                 color = MaterialTheme.colorScheme.background,
                 fontWeight = FontWeight.Medium,

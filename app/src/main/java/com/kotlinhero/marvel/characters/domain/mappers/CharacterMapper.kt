@@ -15,9 +15,9 @@ private const val LOREM_IPSUM = "Lorem ipsum dolor sit amet, consectetur adipisc
 
 fun CharacterDto.toCharacter() = Character(
     id = id,
-    name = name,
-    description = description.ifEmpty { LOREM_IPSUM },
-    thumbnail = thumbnail.fullPath,
+    name = name ?: "NULL",
+    description = description?.ifEmpty { LOREM_IPSUM } ?: "NULL",
+    thumbnail = thumbnail?.fullPath ?: "NULL",
     age = "30",
     height = "1.80",
     weight = "78",
@@ -26,28 +26,28 @@ fun CharacterDto.toCharacter() = Character(
 
 fun ComicDto.toComic() = Comic(
     id = id,
-    title = title,
-    thumbnail = thumbnail.fullPath,
-    description = description
+    title = title ?: "NULL",
+    thumbnail = thumbnail?.fullPath ?: "NULL",
+    description = description ?: "NULL"
 )
 
 fun EventDto.toEvent() = Event(
     id = id,
-    title = title,
-    thumbnail = thumbnail.fullPath,
-    description = description
+    title = title ?: "NULL",
+    thumbnail = thumbnail?.fullPath ?: "NULL",
+    description = description ?: "NULL"
 )
 
 fun SerieDto.toSerie() = Serie(
     id = id,
-    title = title,
-    thumbnail = thumbnail.fullPath,
-    description = description
+    title = title ?: "NULL",
+    thumbnail = thumbnail?.fullPath ?: "NULL",
+    description = description ?: "NULL"
 )
 
 fun StoryDto.toStory() = Story(
     id = id,
-    title = title,
-    thumbnail = thumbnail.fullPath,
-    description = description
+    title = title ?: "NULL",
+    thumbnail = thumbnail?.fullPath ?: "NULL",
+    description = description ?: "NULL"
 )
