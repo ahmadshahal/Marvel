@@ -7,15 +7,20 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kotlinhero.marvel.characters.domain.entities.Character
+import com.kotlinhero.marvel.characters.domain.entities.Comic
 import com.kotlinhero.marvel.characters.domain.usecases.GetCharacterUseCase
 import com.kotlinhero.marvel.characters.domain.usecases.GetComicsUseCase
 import com.kotlinhero.marvel.characters.ui.states.CharacterDetailsState
 import com.kotlinhero.marvel.common.ui.states.FetchState
 import com.kotlinhero.marvel.common.utils.UiText
+import com.kotlinhero.marvel.common.utils.evaluate
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 
 class CharacterDetailsViewModel(
-    private val savedStateHandle: SavedStateHandle,
+    savedStateHandle: SavedStateHandle,
     private val getCharacterUseCase: GetCharacterUseCase,
     private val getComicsUseCase: GetComicsUseCase,
 ) : ViewModel() {
@@ -25,73 +30,43 @@ class CharacterDetailsViewModel(
     var characterDetailsState by mutableStateOf(CharacterDetailsState())
         private set
 
-    val totalFetchState by derivedStateOf {
-        when {
-            characterDetailsState.characterFetchState is FetchState.Loading
-                    || characterDetailsState.comicsFetchState is FetchState.Loading -> FetchState.Loading<Unit>()
+    val character by derivedStateOf {
+        // TODO: Find a solution for the type safety
+        characterDetailsState.fetchState.data?.get(0) as? Character ?: Character()
+    }
 
-            characterDetailsState.characterFetchState is FetchState.Error -> {
-                val errorState = characterDetailsState.characterFetchState as FetchState.Error
-                FetchState.Error(errorState.message)
-            }
-
-            characterDetailsState.comicsFetchState is FetchState.Error -> {
-                val errorState = characterDetailsState.comicsFetchState as FetchState.Error
-                FetchState.Error(errorState.message)
-            }
-
-            characterDetailsState.characterFetchState is FetchState.Success
-                    && characterDetailsState.comicsFetchState is FetchState.Success ->
-                FetchState.Success(Unit)
-
-            else -> FetchState.Initial()
-        }
+    val comics by derivedStateOf {
+        // TODO: Find a solution for the type safety
+        characterDetailsState.fetchState.data?.get(1) as? List<Comic> ?: emptyList()
     }
 
     init {
-        getCharacter()
-        getComics()
+        getData()
     }
 
-    fun refresh() {
-        getCharacter()
-        getComics()
-    }
+    fun refresh() = getData()
 
-    private fun getCharacter() {
+    private fun getData() {
         viewModelScope.launch {
-            characterDetailsState = characterDetailsState.characterFetchStateCopy(
-                FetchState.Loading()
-            )
-            getCharacterUseCase(id).fold(
+            characterDetailsState =
+                characterDetailsState.copy(fetchState = FetchState.Loading())
+            val character = async { getCharacterUseCase(id) }
+            val comics = async { getComicsUseCase(id) }
+            val results = awaitAll(character, comics)
+            val evaluatedResult = results.evaluate()
+            evaluatedResult.fold(
                 onSuccess = {
-                    characterDetailsState = characterDetailsState.characterFetchStateCopy(
-                        FetchState.Success(it)
+                    characterDetailsState = characterDetailsState.copy(
+                        fetchState = FetchState.Success(it)
                     )
                 },
                 onFailure = {
-                    characterDetailsState = characterDetailsState.characterFetchStateCopy(
-                        FetchState.Error(UiText.DynamicString(it.localizedMessage ?: ""))
-                    )
-                }
-            )
-        }
-    }
-
-    private fun getComics() {
-        viewModelScope.launch {
-            characterDetailsState = characterDetailsState.comicsFetchStateCopy(
-                FetchState.Loading()
-            )
-            getComicsUseCase(id).fold(
-                onSuccess = {
-                    characterDetailsState = characterDetailsState.comicsFetchStateCopy(
-                        FetchState.Success(it)
-                    )
-                },
-                onFailure = {
-                    characterDetailsState = characterDetailsState.comicsFetchStateCopy(
-                        FetchState.Error(UiText.DynamicString(it.localizedMessage ?: ""))
+                    characterDetailsState = characterDetailsState.copy(
+                        fetchState = FetchState.Error(
+                            UiText.DynamicString(
+                                it.localizedMessage ?: ""
+                            )
+                        )
                     )
                 }
             )

@@ -77,7 +77,7 @@ fun CharacterDetailsScreen(viewModel: CharacterDetailsViewModel = koinViewModel(
             contentAlignment = Alignment.Center
         ) {
             AnimatedContent(
-                targetState = viewModel.totalFetchState,
+                targetState = viewModel.characterDetailsState.fetchState,
                 contentAlignment = Alignment.Center,
                 label = "",
                 transitionSpec = { fadeIn() togetherWith fadeOut() }
@@ -89,7 +89,7 @@ fun CharacterDetailsScreen(viewModel: CharacterDetailsViewModel = koinViewModel(
                         onClickTryAgain = viewModel::refresh
                     )
                     is FetchState.Success -> {
-                        val character = viewModel.characterDetailsState.characterFetchState.data ?: Character()
+                        val character = viewModel.character
                         CharacterBackground(thumbnail = character.thumbnail)
                         Column(
                             modifier = Modifier.fillMaxSize(),
@@ -100,7 +100,7 @@ fun CharacterDetailsScreen(viewModel: CharacterDetailsViewModel = koinViewModel(
                                 character = character
                             )
                             Spacer(modifier = Modifier.height(16.dp))
-                            val comics = viewModel.characterDetailsState.comicsFetchState.data ?: emptyList()
+                            val comics = viewModel.comics
                             ComicsLazyRow(comics = comics)
                         }
                     }

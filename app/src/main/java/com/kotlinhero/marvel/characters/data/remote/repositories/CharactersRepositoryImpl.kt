@@ -4,11 +4,11 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
-import com.kotlinhero.marvel.characters.data.mappers.toCharacter
-import com.kotlinhero.marvel.characters.data.mappers.toComic
 import com.kotlinhero.marvel.characters.data.remote.api.CharactersApi
 import com.kotlinhero.marvel.characters.data.remote.paging.CharactersPagingSource
 import com.kotlinhero.marvel.characters.domain.entities.Character
+import com.kotlinhero.marvel.characters.domain.mappers.toCharacter
+import com.kotlinhero.marvel.characters.domain.mappers.toComic
 import com.kotlinhero.marvel.characters.domain.repositories.CharactersRepository
 import com.kotlinhero.marvel.common.NETWORK_PAGE_SIZE
 import com.kotlinhero.marvel.common.repositories.BaseRemoteRepository

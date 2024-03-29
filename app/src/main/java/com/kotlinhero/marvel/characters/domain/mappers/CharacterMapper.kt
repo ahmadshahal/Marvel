@@ -1,4 +1,4 @@
-package com.kotlinhero.marvel.characters.data.mappers
+package com.kotlinhero.marvel.characters.domain.mappers
 
 import com.kotlinhero.marvel.characters.data.remote.models.CharacterDto
 import com.kotlinhero.marvel.characters.data.remote.models.ComicDto
