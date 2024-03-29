@@ -31,15 +31,18 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kotlinhero.marvel.R
-import com.kotlinhero.marvel.characters.domain.entities.Event
-import com.kotlinhero.marvel.characters.domain.enums.ProductType
+import com.kotlinhero.marvel.characters.domain.entities.publications.Publication
+import com.kotlinhero.marvel.characters.domain.enums.PublicationType
 import com.kotlinhero.marvel.common.ui.reusables.image.NetworkImage
 
 @Composable
-fun EventsLazyRow(
+fun PublicationLazyRow(
     modifier: Modifier = Modifier,
-    events: List<Event>,
-    onProductTypeChange: (ProductType) -> Unit
+    publications: List<Publication>,
+    onProductTypeChange: (PublicationType) -> Unit,
+    title: String,
+    nextPublicationTitle: String,
+    emptyStatement: String,
 ) {
     Column {
         Row(
@@ -50,14 +53,14 @@ fun EventsLazyRow(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = stringResource(R.string.events),
+                text = title,
                 fontSize = 20.sp,
                 color = MaterialTheme.colorScheme.background,
                 fontWeight = FontWeight.Bold
             )
             Text(
-                modifier = Modifier.clickable { onProductTypeChange(ProductType.SERIES) },
-                text = stringResource(R.string.view_series),
+                modifier = Modifier.clickable { onProductTypeChange(PublicationType.STORIES) },
+                text = stringResource(R.string.view) + " " + nextPublicationTitle,
                 fontSize = 14.sp,
                 color = MaterialTheme.colorScheme.background,
                 fontWeight = FontWeight.Medium,
@@ -65,15 +68,15 @@ fun EventsLazyRow(
             )
         }
         Spacer(modifier = Modifier.height(16.dp))
-        when(events.isNotEmpty()) {
+        when(publications.isNotEmpty()) {
             true -> LazyRow(
                 modifier = modifier,
-                verticalAlignment =Alignment.CenterVertically,
+                verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 contentPadding = PaddingValues(horizontal = 24.dp),
             ) {
-                items(events, key = { it.id }) {
-                    EventItem(event = it)
+                items(publications, key = { it.id }) {
+                    PublicationItem(publication = it)
                 }
             }
             false -> Box(
@@ -84,7 +87,7 @@ fun EventsLazyRow(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = stringResource(R.string.hasn_t_participated_in_any_events),
+                    text = emptyStatement,
                     fontWeight = FontWeight.Medium,
                     fontSize = 14.sp,
                     textAlign = TextAlign.Center,
@@ -96,13 +99,13 @@ fun EventsLazyRow(
 }
 
 @Composable
-private fun EventItem(modifier: Modifier = Modifier, event: Event) {
+private fun PublicationItem(modifier: Modifier = Modifier, publication: Publication) {
     Box(
         modifier = modifier
             .size(140.dp)
             .clip(RoundedCornerShape(16.dp)),
     ) {
-        NetworkImage(url = event.thumbnail, modifier = Modifier.matchParentSize())
+        NetworkImage(url = publication.thumbnail, modifier = Modifier.matchParentSize())
         Spacer(
             modifier = Modifier
                 .matchParentSize()
@@ -120,7 +123,7 @@ private fun EventItem(modifier: Modifier = Modifier, event: Event) {
             modifier = Modifier
                 .align(Alignment.BottomStart)
                 .padding(12.dp),
-            text = event.title,
+            text = publication.title,
             fontSize = 13.sp,
             color = MaterialTheme.colorScheme.onPrimary,
             fontWeight = FontWeight.ExtraBold,

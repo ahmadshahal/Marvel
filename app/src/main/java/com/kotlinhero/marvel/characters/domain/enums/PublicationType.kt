@@ -1,6 +1,6 @@
 package com.kotlinhero.marvel.characters.domain.enums
 
-enum class ProductType {
+enum class PublicationType {
     EVENTS,
     STORIES,
     SERIES,

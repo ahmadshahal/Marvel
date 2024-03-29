@@ -1,9 +1,5 @@
 package com.kotlinhero.marvel.characters.ui.screens
 
-import android.graphics.Color
-import androidx.activity.ComponentActivity
-import androidx.activity.SystemBarStyle
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
@@ -44,18 +40,16 @@ import com.kotlinhero.marvel.characters.ui.viewmodels.CharactersViewModel
 import com.kotlinhero.marvel.common.ui.navigation.Destination
 import com.kotlinhero.marvel.common.ui.providers.LocalNavController
 import com.kotlinhero.marvel.common.ui.reusables.buttons.BackToTopButton
+import com.kotlinhero.marvel.common.utils.enableLightEdgeToEdge
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CharactersScreen(viewModel: CharactersViewModel = koinViewModel()) {
-    val activity = LocalContext.current as ComponentActivity
+    val context = LocalContext.current
     LaunchedEffect(key1 = Unit) {
-        activity.enableEdgeToEdge(
-            statusBarStyle = SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT),
-            navigationBarStyle = SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)
-        )
+        context.enableLightEdgeToEdge()
     }
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val coroutineScope = rememberCoroutineScope()

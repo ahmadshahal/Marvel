@@ -6,10 +6,10 @@ import com.kotlinhero.marvel.characters.data.remote.models.EventDto
 import com.kotlinhero.marvel.characters.data.remote.models.SerieDto
 import com.kotlinhero.marvel.characters.data.remote.models.StoryDto
 import com.kotlinhero.marvel.characters.domain.entities.Character
-import com.kotlinhero.marvel.characters.domain.entities.Comic
-import com.kotlinhero.marvel.characters.domain.entities.Event
-import com.kotlinhero.marvel.characters.domain.entities.Serie
-import com.kotlinhero.marvel.characters.domain.entities.Story
+import com.kotlinhero.marvel.characters.domain.entities.publications.Comic
+import com.kotlinhero.marvel.characters.domain.entities.publications.Event
+import com.kotlinhero.marvel.characters.domain.entities.publications.Serie
+import com.kotlinhero.marvel.characters.domain.entities.publications.Story
 
 private const val LOREM_IPSUM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
 

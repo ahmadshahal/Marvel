@@ -1,6 +1,6 @@
-package com.kotlinhero.marvel.characters.domain.entities
+package com.kotlinhero.marvel.characters.domain.entities.publications
 
-data class Serie(
+open class Publication(
     val id: Int,
     val title: String,
     val description: String,

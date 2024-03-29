@@ -1,8 +1,5 @@
 package com.kotlinhero.marvel.characters.ui.screens
 
-import androidx.activity.ComponentActivity
-import androidx.activity.SystemBarStyle
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -36,34 +33,34 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kotlinhero.marvel.R
 import com.kotlinhero.marvel.characters.domain.entities.Character
-import com.kotlinhero.marvel.characters.domain.enums.ProductType
+import com.kotlinhero.marvel.characters.domain.entities.publications.Comic
+import com.kotlinhero.marvel.characters.domain.entities.publications.Event
+import com.kotlinhero.marvel.characters.domain.entities.publications.Serie
+import com.kotlinhero.marvel.characters.domain.entities.publications.Story
+import com.kotlinhero.marvel.characters.domain.enums.PublicationType
 import com.kotlinhero.marvel.characters.ui.components.CharacterAttributes
-import com.kotlinhero.marvel.characters.ui.components.ComicsLazyRow
-import com.kotlinhero.marvel.characters.ui.components.EventsLazyRow
-import com.kotlinhero.marvel.characters.ui.components.SeriesLazyRow
-import com.kotlinhero.marvel.characters.ui.components.StoriesLazyRow
+import com.kotlinhero.marvel.characters.ui.components.PublicationLazyRow
 import com.kotlinhero.marvel.characters.ui.viewmodels.CharacterDetailsViewModel
 import com.kotlinhero.marvel.common.ui.providers.LocalNavController
 import com.kotlinhero.marvel.common.ui.reusables.error.NetflixErrorBox
 import com.kotlinhero.marvel.common.ui.reusables.image.NetworkImage
 import com.kotlinhero.marvel.common.ui.reusables.loading.NetflixLoadingBox
 import com.kotlinhero.marvel.common.ui.states.FetchState
+import com.kotlinhero.marvel.common.utils.enableDarkEdgeToEdge
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun CharacterDetailsScreen(viewModel: CharacterDetailsViewModel = koinViewModel()) {
-    val activity = LocalContext.current as ComponentActivity
+    val context = LocalContext.current
     LaunchedEffect(key1 = Unit) {
-        activity.enableEdgeToEdge(
-            statusBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT),
-            navigationBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT)
-        )
+        context.enableDarkEdgeToEdge()
     }
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -103,34 +100,75 @@ fun CharacterDetailsScreen(viewModel: CharacterDetailsViewModel = koinViewModel(
                                 character = viewModel.character
                             )
                             Spacer(modifier = Modifier.height(16.dp))
-                            AnimatedContent(
-                                targetState = viewModel.characterDetailsState.selectedProductType,
-                                label = ""
-                            ) { productType ->
-                                when(productType) {
-                                    ProductType.COMICS -> ComicsLazyRow(
-                                        comics = viewModel.comics,
-                                        onProductTypeChange = viewModel::onProductTypeChange
-                                    )
-                                    ProductType.SERIES -> SeriesLazyRow(
-                                        series = viewModel.series,
-                                        onProductTypeChange = viewModel::onProductTypeChange
-                                    )
-                                    ProductType.STORIES -> StoriesLazyRow(
-                                        stories = viewModel.stories,
-                                        onProductTypeChange = viewModel::onProductTypeChange
-                                    )
-                                    else -> EventsLazyRow(
-                                        events = viewModel.events,
-                                        onProductTypeChange = viewModel::onProductTypeChange
-                                    )
-                                }
-                            }
+                            PublicationsBox(
+                                publicationType = viewModel.characterDetailsState.selectedPublicationType,
+                                comics = viewModel.comics,
+                                series = viewModel.series,
+                                stories = viewModel.stories,
+                                events = viewModel.events,
+                                onPublicationTypeChange = viewModel::onPublicationTypeChange
+                            )
                         }
                     }
                     else -> NetflixLoadingBox()
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun PublicationsBox(
+    modifier: Modifier = Modifier,
+    publicationType: PublicationType,
+    comics: List<Comic>,
+    series: List<Serie>,
+    stories: List<Story>,
+    events: List<Event>,
+    onPublicationTypeChange: (PublicationType) -> Unit
+) {
+    AnimatedContent(
+        modifier = modifier,
+        targetState = publicationType,
+        label = ""
+    ) { productType ->
+        when(productType) {
+            PublicationType.COMICS -> PublicationLazyRow(
+                publications = comics,
+                onProductTypeChange = {
+                    onPublicationTypeChange(PublicationType.SERIES)
+                },
+                title = stringResource(id = R.string.comics),
+                emptyStatement = stringResource(id = R.string.hasn_t_participated_in_any_comics),
+                nextPublicationTitle = stringResource(id = R.string.series)
+            )
+            PublicationType.SERIES -> PublicationLazyRow(
+                publications = series,
+                onProductTypeChange = {
+                    onPublicationTypeChange(PublicationType.STORIES)
+                },
+                title = stringResource(id = R.string.series),
+                emptyStatement = stringResource(id = R.string.hasn_t_participated_in_any_series),
+                nextPublicationTitle = stringResource(id = R.string.stories)
+            )
+            PublicationType.STORIES -> PublicationLazyRow(
+                publications = stories,
+                onProductTypeChange = {
+                    onPublicationTypeChange(PublicationType.EVENTS)
+                },
+                title = stringResource(id = R.string.stories),
+                emptyStatement = stringResource(id = R.string.hasn_t_participated_in_any_stories),
+                nextPublicationTitle = stringResource(id = R.string.events)
+            )
+            else -> PublicationLazyRow(
+                publications = events,
+                onProductTypeChange = {
+                    onPublicationTypeChange(PublicationType.COMICS)
+                },
+                title = stringResource(id = R.string.events),
+                emptyStatement = stringResource(id = R.string.hasn_t_participated_in_any_events),
+                nextPublicationTitle = stringResource(id = R.string.comics)
+            )
         }
     }
 }

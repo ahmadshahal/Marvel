@@ -8,11 +8,11 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kotlinhero.marvel.characters.domain.entities.Character
-import com.kotlinhero.marvel.characters.domain.entities.Comic
-import com.kotlinhero.marvel.characters.domain.entities.Event
-import com.kotlinhero.marvel.characters.domain.entities.Serie
-import com.kotlinhero.marvel.characters.domain.entities.Story
-import com.kotlinhero.marvel.characters.domain.enums.ProductType
+import com.kotlinhero.marvel.characters.domain.entities.publications.Comic
+import com.kotlinhero.marvel.characters.domain.entities.publications.Event
+import com.kotlinhero.marvel.characters.domain.entities.publications.Serie
+import com.kotlinhero.marvel.characters.domain.entities.publications.Story
+import com.kotlinhero.marvel.characters.domain.enums.PublicationType
 import com.kotlinhero.marvel.characters.domain.usecases.GetCharacterUseCase
 import com.kotlinhero.marvel.characters.domain.usecases.GetComicsUseCase
 import com.kotlinhero.marvel.characters.domain.usecases.GetEventsUseCase
@@ -91,7 +91,7 @@ class CharacterDetailsViewModel(
         }
     }
 
-    fun onProductTypeChange(productType: ProductType) {
-        characterDetailsState = characterDetailsState.copy(selectedProductType = productType)
+    fun onPublicationTypeChange(publicationType: PublicationType) {
+        characterDetailsState = characterDetailsState.copy(selectedPublicationType = publicationType)
     }
 }

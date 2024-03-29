@@ -2,10 +2,10 @@ package com.kotlinhero.marvel.characters.domain.repositories
 
 import androidx.paging.PagingData
 import com.kotlinhero.marvel.characters.domain.entities.Character
-import com.kotlinhero.marvel.characters.domain.entities.Comic
-import com.kotlinhero.marvel.characters.domain.entities.Event
-import com.kotlinhero.marvel.characters.domain.entities.Serie
-import com.kotlinhero.marvel.characters.domain.entities.Story
+import com.kotlinhero.marvel.characters.domain.entities.publications.Comic
+import com.kotlinhero.marvel.characters.domain.entities.publications.Event
+import com.kotlinhero.marvel.characters.domain.entities.publications.Serie
+import com.kotlinhero.marvel.characters.domain.entities.publications.Story
 import kotlinx.coroutines.flow.Flow
 
 interface CharactersRepository {

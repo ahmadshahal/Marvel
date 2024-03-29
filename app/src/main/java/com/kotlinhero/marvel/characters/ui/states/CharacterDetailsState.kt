@@ -1,16 +1,16 @@
 package com.kotlinhero.marvel.characters.ui.states
 
 import com.kotlinhero.marvel.characters.domain.entities.Character
-import com.kotlinhero.marvel.characters.domain.entities.Comic
-import com.kotlinhero.marvel.characters.domain.entities.Event
-import com.kotlinhero.marvel.characters.domain.entities.Serie
-import com.kotlinhero.marvel.characters.domain.entities.Story
-import com.kotlinhero.marvel.characters.domain.enums.ProductType
+import com.kotlinhero.marvel.characters.domain.entities.publications.Comic
+import com.kotlinhero.marvel.characters.domain.entities.publications.Event
+import com.kotlinhero.marvel.characters.domain.entities.publications.Serie
+import com.kotlinhero.marvel.characters.domain.entities.publications.Story
+import com.kotlinhero.marvel.characters.domain.enums.PublicationType
 import com.kotlinhero.marvel.common.ui.states.FetchState
 
 data class CharacterDetailsState(
     val fetchState: FetchState<CharacterDetails> = FetchState.Initial(),
-    val selectedProductType: ProductType = ProductType.COMICS,
+    val selectedPublicationType: PublicationType = PublicationType.COMICS,
 )
 
 data class CharacterDetails(
