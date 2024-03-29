@@ -9,8 +9,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kotlinhero.marvel.characters.domain.entities.Character
 import com.kotlinhero.marvel.characters.domain.entities.Comic
+import com.kotlinhero.marvel.characters.domain.entities.Event
+import com.kotlinhero.marvel.characters.domain.enums.ProductType
 import com.kotlinhero.marvel.characters.domain.usecases.GetCharacterUseCase
 import com.kotlinhero.marvel.characters.domain.usecases.GetComicsUseCase
+import com.kotlinhero.marvel.characters.domain.usecases.GetEventsUseCase
 import com.kotlinhero.marvel.characters.ui.states.CharacterDetailsState
 import com.kotlinhero.marvel.common.ui.states.FetchState
 import com.kotlinhero.marvel.common.utils.UiText
@@ -23,6 +26,7 @@ class CharacterDetailsViewModel(
     savedStateHandle: SavedStateHandle,
     private val getCharacterUseCase: GetCharacterUseCase,
     private val getComicsUseCase: GetComicsUseCase,
+    private val getEventsUseCase: GetEventsUseCase,
 ) : ViewModel() {
 
     private val id = savedStateHandle.get<Int>("id") ?: 0
@@ -40,6 +44,11 @@ class CharacterDetailsViewModel(
         characterDetailsState.fetchState.data?.get(1) as? List<Comic> ?: emptyList()
     }
 
+    val events by derivedStateOf {
+        // TODO: Find a solution for the type safety
+        characterDetailsState.fetchState.data?.get(2) as? List<Event> ?: emptyList()
+    }
+
     init {
         getData()
     }
@@ -50,7 +59,8 @@ class CharacterDetailsViewModel(
                 characterDetailsState.copy(fetchState = FetchState.Loading())
             val character = async { getCharacterUseCase(id) }
             val comics = async { getComicsUseCase(id) }
-            val results = awaitAll(character, comics)
+            val events = async { getEventsUseCase(id) }
+            val results = awaitAll(character, comics, events)
             val evaluatedResult = results.evaluate()
             evaluatedResult.fold(
                 onSuccess = {
@@ -69,5 +79,9 @@ class CharacterDetailsViewModel(
                 }
             )
         }
+    }
+
+    fun onProductTypeChange(productType: ProductType) {
+        characterDetailsState = characterDetailsState.copy(selectedProductType = productType)
     }
 }

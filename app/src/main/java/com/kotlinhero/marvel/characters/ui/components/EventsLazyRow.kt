@@ -33,15 +33,15 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kotlinhero.marvel.R
-import com.kotlinhero.marvel.characters.domain.entities.Comic
+import com.kotlinhero.marvel.characters.domain.entities.Event
 import com.kotlinhero.marvel.characters.domain.enums.ProductType
 import com.kotlinhero.marvel.common.ui.reusables.image.NetworkImage
 import com.kotlinhero.marvel.common.ui.theme.White
 
 @Composable
-fun ComicsLazyRow(
+fun EventsLazyRow(
     modifier: Modifier = Modifier,
-    comics: List<Comic>,
+    events: List<Event>,
     onProductTypeChange: (ProductType) -> Unit
 ) {
     Column {
@@ -51,13 +51,13 @@ fun ComicsLazyRow(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = stringResource(R.string.comics),
+                text = stringResource(R.string.events),
                 fontSize = 20.sp,
                 color = MaterialTheme.colorScheme.background,
                 fontWeight = FontWeight.Bold
             )
             Text(
-                modifier = Modifier.clickable { onProductTypeChange(ProductType.EVENTS) },
+                modifier = Modifier.clickable { onProductTypeChange(ProductType.COMICS) },
                 text = "Switch Type",
                 fontSize = 14.sp,
                 color = MaterialTheme.colorScheme.background,
@@ -66,15 +66,15 @@ fun ComicsLazyRow(
             )
         }
         Spacer(modifier = Modifier.height(16.dp))
-        when(comics.isNotEmpty()) {
+        when(events.isNotEmpty()) {
             true -> LazyRow(
                 modifier = modifier,
                 verticalAlignment =Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 contentPadding = PaddingValues(horizontal = 24.dp),
             ) {
-                items(comics) {
-                    ComicItem(comic = it)
+                items(events) {
+                    EventItem(event = it)
                 }
             }
             false -> Column(
@@ -90,13 +90,13 @@ fun ComicsLazyRow(
 }
 
 @Composable
-private fun ComicItem(modifier: Modifier = Modifier, comic: Comic) {
+private fun EventItem(modifier: Modifier = Modifier, event: Event) {
     Box(
         modifier = modifier
             .size(140.dp)
             .clip(RoundedCornerShape(16.dp)),
     ) {
-        NetworkImage(url = comic.thumbnail, modifier = Modifier.matchParentSize())
+        NetworkImage(url = event.thumbnail, modifier = Modifier.matchParentSize())
         Spacer(
             modifier = Modifier
                 .matchParentSize()
@@ -114,7 +114,7 @@ private fun ComicItem(modifier: Modifier = Modifier, comic: Comic) {
             modifier = Modifier
                 .align(Alignment.BottomStart)
                 .padding(12.dp),
-            text = comic.title,
+            text = event.title,
             fontSize = 13.sp,
             color = MaterialTheme.colorScheme.onPrimary,
             fontWeight = FontWeight.ExtraBold,

@@ -42,8 +42,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kotlinhero.marvel.R
 import com.kotlinhero.marvel.characters.domain.entities.Character
+import com.kotlinhero.marvel.characters.domain.enums.ProductType
 import com.kotlinhero.marvel.characters.ui.components.CharacterAttributes
 import com.kotlinhero.marvel.characters.ui.components.ComicsLazyRow
+import com.kotlinhero.marvel.characters.ui.components.EventsLazyRow
 import com.kotlinhero.marvel.characters.ui.viewmodels.CharacterDetailsViewModel
 import com.kotlinhero.marvel.common.ui.providers.LocalNavController
 import com.kotlinhero.marvel.common.ui.reusables.error.NetflixErrorBox
@@ -100,8 +102,21 @@ fun CharacterDetailsScreen(viewModel: CharacterDetailsViewModel = koinViewModel(
                                 character = character
                             )
                             Spacer(modifier = Modifier.height(16.dp))
-                            val comics = viewModel.comics
-                            ComicsLazyRow(comics = comics)
+                            AnimatedContent(
+                                targetState = viewModel.characterDetailsState.selectedProductType,
+                                label = ""
+                            ) { productType ->
+                                when(productType) {
+                                    ProductType.COMICS -> ComicsLazyRow(
+                                        comics = viewModel.comics,
+                                        onProductTypeChange = viewModel::onProductTypeChange
+                                    )
+                                    else -> EventsLazyRow(
+                                        events = viewModel.events,
+                                        onProductTypeChange = viewModel::onProductTypeChange
+                                    )
+                                }
+                            }
                         }
                     }
                     else -> NetflixLoadingBox()
