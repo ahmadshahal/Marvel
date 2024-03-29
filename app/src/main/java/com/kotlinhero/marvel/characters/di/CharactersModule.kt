@@ -7,6 +7,7 @@ import com.kotlinhero.marvel.characters.domain.usecases.GetCharacterUseCase
 import com.kotlinhero.marvel.characters.domain.usecases.GetCharactersUseCase
 import com.kotlinhero.marvel.characters.domain.usecases.GetComicsUseCase
 import com.kotlinhero.marvel.characters.domain.usecases.GetEventsUseCase
+import com.kotlinhero.marvel.characters.domain.usecases.GetSeriesUseCase
 import com.kotlinhero.marvel.characters.ui.viewmodels.CharacterDetailsViewModel
 import com.kotlinhero.marvel.characters.ui.viewmodels.CharactersViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -20,6 +21,7 @@ val CharactersModule = module {
     factory { GetCharacterUseCase(get()) }
     factory { GetComicsUseCase(get()) }
     factory { GetEventsUseCase(get()) }
+    factory { GetSeriesUseCase(get()) }
     viewModel { CharactersViewModel(get()) }
-    viewModel { CharacterDetailsViewModel(get(), get(), get(), get()) }
+    viewModel { CharacterDetailsViewModel(get(), get(), get(), get(), get()) }
 }

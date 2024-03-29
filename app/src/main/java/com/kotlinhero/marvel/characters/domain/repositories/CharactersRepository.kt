@@ -4,6 +4,7 @@ import androidx.paging.PagingData
 import com.kotlinhero.marvel.characters.domain.entities.Character
 import com.kotlinhero.marvel.characters.domain.entities.Comic
 import com.kotlinhero.marvel.characters.domain.entities.Event
+import com.kotlinhero.marvel.characters.domain.entities.Serie
 import kotlinx.coroutines.flow.Flow
 
 interface CharactersRepository {
@@ -14,6 +15,8 @@ interface CharactersRepository {
     suspend fun getComics(characterId: Int): Result<List<Comic>>
 
     suspend fun getEvents(characterId: Int): Result<List<Event>>
+
+    suspend fun getSeries(characterId: Int): Result<List<Serie>>
 
     suspend fun getCharactersPagingFlow(): Flow<PagingData<Character>>
 }

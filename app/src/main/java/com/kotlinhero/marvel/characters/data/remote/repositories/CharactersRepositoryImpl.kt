@@ -10,6 +10,7 @@ import com.kotlinhero.marvel.characters.domain.entities.Character
 import com.kotlinhero.marvel.characters.domain.mappers.toCharacter
 import com.kotlinhero.marvel.characters.domain.mappers.toComic
 import com.kotlinhero.marvel.characters.domain.mappers.toEvent
+import com.kotlinhero.marvel.characters.domain.mappers.toSerie
 import com.kotlinhero.marvel.characters.domain.repositories.CharactersRepository
 import com.kotlinhero.marvel.common.NETWORK_PAGE_SIZE
 import com.kotlinhero.marvel.common.repositories.BaseRemoteRepository
@@ -33,6 +34,10 @@ class CharactersRepositoryImpl(
 
     override suspend fun getEvents(characterId: Int) = runCatching {
         charactersApi.getEvents(characterId).map { it.toEvent() }
+    }
+
+    override suspend fun getSeries(characterId: Int) = runCatching {
+        charactersApi.getSeries(characterId).map { it.toSerie() }
     }
 
     override suspend fun getCharactersPagingFlow(): Flow<PagingData<Character>> {

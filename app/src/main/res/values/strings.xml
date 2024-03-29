@@ -12,4 +12,7 @@
     <string name="view_comics">View comics</string>
     <string name="hasn_t_participated_in_any_events">Hasn\'t participated in any events..</string>
     <string name="hasn_t_participated_in_any_comics">Hasn\'t participated in any comics..</string>
+    <string name="hasn_t_participated_in_any_series">Hasn\'t participated in any series</string>
+    <string name="series">Series</string>
+    <string name="view_stories">View stories</string>
 </resources>
