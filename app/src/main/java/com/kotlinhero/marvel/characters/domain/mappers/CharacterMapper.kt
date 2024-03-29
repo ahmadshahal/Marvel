@@ -4,10 +4,12 @@ import com.kotlinhero.marvel.characters.data.remote.models.CharacterDto
 import com.kotlinhero.marvel.characters.data.remote.models.ComicDto
 import com.kotlinhero.marvel.characters.data.remote.models.EventDto
 import com.kotlinhero.marvel.characters.data.remote.models.SerieDto
+import com.kotlinhero.marvel.characters.data.remote.models.StoryDto
 import com.kotlinhero.marvel.characters.domain.entities.Character
 import com.kotlinhero.marvel.characters.domain.entities.Comic
 import com.kotlinhero.marvel.characters.domain.entities.Event
 import com.kotlinhero.marvel.characters.domain.entities.Serie
+import com.kotlinhero.marvel.characters.domain.entities.Story
 
 private const val LOREM_IPSUM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
 
@@ -37,6 +39,13 @@ fun EventDto.toEvent() = Event(
 )
 
 fun SerieDto.toSerie() = Serie(
+    id = id,
+    title = title,
+    thumbnail = thumbnail.fullPath,
+    description = description
+)
+
+fun StoryDto.toStory() = Story(
     id = id,
     title = title,
     thumbnail = thumbnail.fullPath,

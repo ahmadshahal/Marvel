@@ -47,6 +47,7 @@ import com.kotlinhero.marvel.characters.ui.components.CharacterAttributes
 import com.kotlinhero.marvel.characters.ui.components.ComicsLazyRow
 import com.kotlinhero.marvel.characters.ui.components.EventsLazyRow
 import com.kotlinhero.marvel.characters.ui.components.SeriesLazyRow
+import com.kotlinhero.marvel.characters.ui.components.StoriesLazyRow
 import com.kotlinhero.marvel.characters.ui.viewmodels.CharacterDetailsViewModel
 import com.kotlinhero.marvel.common.ui.providers.LocalNavController
 import com.kotlinhero.marvel.common.ui.reusables.error.NetflixErrorBox
@@ -113,6 +114,10 @@ fun CharacterDetailsScreen(viewModel: CharacterDetailsViewModel = koinViewModel(
                                     )
                                     ProductType.SERIES -> SeriesLazyRow(
                                         series = viewModel.series,
+                                        onProductTypeChange = viewModel::onProductTypeChange
+                                    )
+                                    ProductType.STORIES -> StoriesLazyRow(
+                                        stories = viewModel.stories,
                                         onProductTypeChange = viewModel::onProductTypeChange
                                     )
                                     else -> EventsLazyRow(

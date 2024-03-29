@@ -4,6 +4,7 @@ import com.kotlinhero.marvel.characters.data.remote.models.CharacterDto
 import com.kotlinhero.marvel.characters.data.remote.models.ComicDto
 import com.kotlinhero.marvel.characters.data.remote.models.EventDto
 import com.kotlinhero.marvel.characters.data.remote.models.SerieDto
+import com.kotlinhero.marvel.characters.data.remote.models.StoryDto
 import com.kotlinhero.marvel.network.data.models.DataResponse
 import com.kotlinhero.marvel.network.data.models.PaginationResponse
 import io.ktor.client.HttpClient
@@ -56,6 +57,16 @@ class CharactersApi(private val httpClient: HttpClient) {
             parameter("offset", 0)
         }
             .body<DataResponse<PaginationResponse<SerieDto>>>()
+            .data
+            .results
+    }
+
+    suspend fun getStories(characterId: Int): List<StoryDto> {
+        return httpClient.get("characters/$characterId/stories") {
+            parameter("limit", 3)
+            parameter("offset", 0)
+        }
+            .body<DataResponse<PaginationResponse<StoryDto>>>()
             .data
             .results
     }

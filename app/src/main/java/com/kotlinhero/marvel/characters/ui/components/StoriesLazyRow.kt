@@ -31,14 +31,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kotlinhero.marvel.R
-import com.kotlinhero.marvel.characters.domain.entities.Event
+import com.kotlinhero.marvel.characters.domain.entities.Story
 import com.kotlinhero.marvel.characters.domain.enums.ProductType
 import com.kotlinhero.marvel.common.ui.reusables.image.NetworkImage
 
 @Composable
-fun EventsLazyRow(
+fun StoriesLazyRow(
     modifier: Modifier = Modifier,
-    events: List<Event>,
+    stories: List<Story>,
     onProductTypeChange: (ProductType) -> Unit
 ) {
     Column {
@@ -50,14 +50,14 @@ fun EventsLazyRow(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = stringResource(R.string.events),
+                text = stringResource(R.string.stories),
                 fontSize = 20.sp,
                 color = MaterialTheme.colorScheme.background,
                 fontWeight = FontWeight.Bold
             )
             Text(
-                modifier = Modifier.clickable { onProductTypeChange(ProductType.SERIES) },
-                text = stringResource(R.string.view_comics),
+                modifier = Modifier.clickable { onProductTypeChange(ProductType.COMICS) },
+                text = stringResource(id = R.string.view_comics),
                 fontSize = 14.sp,
                 color = MaterialTheme.colorScheme.background,
                 fontWeight = FontWeight.Medium,
@@ -65,15 +65,15 @@ fun EventsLazyRow(
             )
         }
         Spacer(modifier = Modifier.height(16.dp))
-        when(events.isNotEmpty()) {
+        when(stories.isNotEmpty()) {
             true -> LazyRow(
                 modifier = modifier,
                 verticalAlignment =Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 contentPadding = PaddingValues(horizontal = 24.dp),
             ) {
-                items(events) {
-                    EventItem(event = it)
+                items(stories) {
+                    StoryItem(story = it)
                 }
             }
             false -> Box(
@@ -84,7 +84,7 @@ fun EventsLazyRow(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = stringResource(R.string.hasn_t_participated_in_any_events),
+                    text = stringResource(R.string.hasn_t_participated_in_any_stories),
                     fontWeight = FontWeight.Medium,
                     fontSize = 14.sp,
                     textAlign = TextAlign.Center,
@@ -96,13 +96,13 @@ fun EventsLazyRow(
 }
 
 @Composable
-private fun EventItem(modifier: Modifier = Modifier, event: Event) {
+private fun StoryItem(modifier: Modifier = Modifier, story: Story) {
     Box(
         modifier = modifier
             .size(140.dp)
             .clip(RoundedCornerShape(16.dp)),
     ) {
-        NetworkImage(url = event.thumbnail, modifier = Modifier.matchParentSize())
+        NetworkImage(url = story.thumbnail, modifier = Modifier.matchParentSize())
         Spacer(
             modifier = Modifier
                 .matchParentSize()
@@ -120,7 +120,7 @@ private fun EventItem(modifier: Modifier = Modifier, event: Event) {
             modifier = Modifier
                 .align(Alignment.BottomStart)
                 .padding(12.dp),
-            text = event.title,
+            text = story.title,
             fontSize = 13.sp,
             color = MaterialTheme.colorScheme.onPrimary,
             fontWeight = FontWeight.ExtraBold,

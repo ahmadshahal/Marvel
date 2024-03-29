@@ -11,11 +11,13 @@ import com.kotlinhero.marvel.characters.domain.entities.Character
 import com.kotlinhero.marvel.characters.domain.entities.Comic
 import com.kotlinhero.marvel.characters.domain.entities.Event
 import com.kotlinhero.marvel.characters.domain.entities.Serie
+import com.kotlinhero.marvel.characters.domain.entities.Story
 import com.kotlinhero.marvel.characters.domain.enums.ProductType
 import com.kotlinhero.marvel.characters.domain.usecases.GetCharacterUseCase
 import com.kotlinhero.marvel.characters.domain.usecases.GetComicsUseCase
 import com.kotlinhero.marvel.characters.domain.usecases.GetEventsUseCase
 import com.kotlinhero.marvel.characters.domain.usecases.GetSeriesUseCase
+import com.kotlinhero.marvel.characters.domain.usecases.GetStoriesUseCase
 import com.kotlinhero.marvel.characters.ui.states.CharacterDetails
 import com.kotlinhero.marvel.characters.ui.states.CharacterDetailsState
 import com.kotlinhero.marvel.common.ui.states.FetchState
@@ -31,6 +33,7 @@ class CharacterDetailsViewModel(
     private val getComicsUseCase: GetComicsUseCase,
     private val getEventsUseCase: GetEventsUseCase,
     private val getSeriesUseCase: GetSeriesUseCase,
+    private val getStoriesUseCase: GetStoriesUseCase,
 ) : ViewModel() {
 
     private val id = savedStateHandle.get<Int>("id") ?: 0
@@ -46,19 +49,21 @@ class CharacterDetailsViewModel(
 
     val series by derivedStateOf { characterDetailsState.fetchState.data?.series ?: emptyList() }
 
+    val stories by derivedStateOf { characterDetailsState.fetchState.data?.stories ?: emptyList() }
+
     init {
         getData()
     }
 
     fun getData() {
         viewModelScope.launch {
-            characterDetailsState =
-                characterDetailsState.copy(fetchState = FetchState.Loading())
+            characterDetailsState = characterDetailsState.copy(fetchState = FetchState.Loading())
             val character = async { getCharacterUseCase(id) }
             val comics = async { getComicsUseCase(id) }
             val events = async { getEventsUseCase(id) }
             val series = async { getSeriesUseCase(id) }
-            val results = awaitAll(character, comics, events, series)
+            val stories = async { getStoriesUseCase(id) }
+            val results = awaitAll(character, comics, events, series, stories)
             val evaluatedResult = results.evaluate()
             evaluatedResult.fold(
                 onSuccess = {
@@ -66,7 +71,8 @@ class CharacterDetailsViewModel(
                         character = it[0] as Character,
                         comics = it[1] as List<Comic>,
                         events = it[2] as List<Event>,
-                        series = it[3] as List<Serie>
+                        series = it[3] as List<Serie>,
+                        stories = it[4] as List<Story>
                     )
                     characterDetailsState = characterDetailsState.copy(
                         fetchState = FetchState.Success(characterDetails)

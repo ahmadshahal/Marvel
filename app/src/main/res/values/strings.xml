@@ -15,4 +15,6 @@
     <string name="hasn_t_participated_in_any_series">Hasn\'t participated in any series</string>
     <string name="series">Series</string>
     <string name="view_stories">View stories</string>
+    <string name="stories">Stories</string>
+    <string name="hasn_t_participated_in_any_stories">Hasn\'t participated in any stories..</string>
 </resources>
