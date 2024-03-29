@@ -91,15 +91,14 @@ fun CharacterDetailsScreen(viewModel: CharacterDetailsViewModel = koinViewModel(
                         onClickTryAgain = viewModel::getData
                     )
                     is FetchState.Success -> {
-                        val character = viewModel.character
-                        CharacterBackground(thumbnail = character.thumbnail)
+                        CharacterBackground(thumbnail = viewModel.character.thumbnail)
                         Column(
                             modifier = Modifier.fillMaxSize(),
                             verticalArrangement = Arrangement.Bottom
                         ) {
                             CharacterDetails(
                                 modifier = Modifier.padding(horizontal = 24.dp),
-                                character = character
+                                character = viewModel.character
                             )
                             Spacer(modifier = Modifier.height(16.dp))
                             AnimatedContent(

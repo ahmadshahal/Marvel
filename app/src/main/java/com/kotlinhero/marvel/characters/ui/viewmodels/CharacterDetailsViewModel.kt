@@ -14,6 +14,7 @@ import com.kotlinhero.marvel.characters.domain.enums.ProductType
 import com.kotlinhero.marvel.characters.domain.usecases.GetCharacterUseCase
 import com.kotlinhero.marvel.characters.domain.usecases.GetComicsUseCase
 import com.kotlinhero.marvel.characters.domain.usecases.GetEventsUseCase
+import com.kotlinhero.marvel.characters.ui.states.CharacterDetails
 import com.kotlinhero.marvel.characters.ui.states.CharacterDetailsState
 import com.kotlinhero.marvel.common.ui.states.FetchState
 import com.kotlinhero.marvel.common.utils.UiText
@@ -34,20 +35,11 @@ class CharacterDetailsViewModel(
     var characterDetailsState by mutableStateOf(CharacterDetailsState())
         private set
 
-    val character by derivedStateOf {
-        // TODO: Find a solution for the type safety
-        characterDetailsState.fetchState.data?.get(0) as? Character ?: Character()
-    }
+    val character by derivedStateOf { characterDetailsState.fetchState.data?.character ?: Character() }
 
-    val comics by derivedStateOf {
-        // TODO: Find a solution for the type safety
-        characterDetailsState.fetchState.data?.get(1) as? List<Comic> ?: emptyList()
-    }
+    val comics by derivedStateOf { characterDetailsState.fetchState.data?.comics ?: emptyList() }
 
-    val events by derivedStateOf {
-        // TODO: Find a solution for the type safety
-        characterDetailsState.fetchState.data?.get(2) as? List<Event> ?: emptyList()
-    }
+    val events by derivedStateOf { characterDetailsState.fetchState.data?.events ?: emptyList() }
 
     init {
         getData()
@@ -64,8 +56,13 @@ class CharacterDetailsViewModel(
             val evaluatedResult = results.evaluate()
             evaluatedResult.fold(
                 onSuccess = {
+                    val characterDetails = CharacterDetails(
+                        character = it[0] as Character,
+                        comics = it[1] as List<Comic>,
+                        events = it[2] as List<Event>
+                    )
                     characterDetailsState = characterDetailsState.copy(
-                        fetchState = FetchState.Success(it)
+                        fetchState = FetchState.Success(characterDetails)
                     )
                 },
                 onFailure = {

@@ -8,4 +8,8 @@
     <string name="loading">Loading..</string>
     <string name="comics">Comics</string>
     <string name="events">Events</string>
+    <string name="view_events">View events</string>
+    <string name="view_comics">View comics</string>
+    <string name="hasn_t_participated_in_any_events">Hasn\'t participated in any events..</string>
+    <string name="hasn_t_participated_in_any_comics">Hasn\'t participated in any comics..</string>
 </resources>
