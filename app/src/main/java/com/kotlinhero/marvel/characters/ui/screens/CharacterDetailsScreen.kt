@@ -46,7 +46,7 @@ import com.kotlinhero.marvel.characters.domain.entities.publications.Serie
 import com.kotlinhero.marvel.characters.domain.entities.publications.Story
 import com.kotlinhero.marvel.characters.domain.enums.PublicationType
 import com.kotlinhero.marvel.characters.ui.components.CharacterAttributes
-import com.kotlinhero.marvel.characters.ui.components.PublicationLazyRow
+import com.kotlinhero.marvel.characters.ui.components.PublicationsLazyRow
 import com.kotlinhero.marvel.characters.ui.viewmodels.CharacterDetailsViewModel
 import com.kotlinhero.marvel.common.ui.providers.LocalNavController
 import com.kotlinhero.marvel.common.ui.reusables.error.NetflixErrorBox
@@ -133,7 +133,7 @@ private fun PublicationsBox(
         label = ""
     ) { productType ->
         when(productType) {
-            PublicationType.COMICS -> PublicationLazyRow(
+            PublicationType.COMICS -> PublicationsLazyRow(
                 publications = comics,
                 onProductTypeChange = {
                     onPublicationTypeChange(PublicationType.SERIES)
@@ -142,7 +142,7 @@ private fun PublicationsBox(
                 emptyStatement = stringResource(id = R.string.hasn_t_participated_in_any_comics),
                 nextPublicationTitle = stringResource(id = R.string.series)
             )
-            PublicationType.SERIES -> PublicationLazyRow(
+            PublicationType.SERIES -> PublicationsLazyRow(
                 publications = series,
                 onProductTypeChange = {
                     onPublicationTypeChange(PublicationType.STORIES)
@@ -151,7 +151,7 @@ private fun PublicationsBox(
                 emptyStatement = stringResource(id = R.string.hasn_t_participated_in_any_series),
                 nextPublicationTitle = stringResource(id = R.string.stories)
             )
-            PublicationType.STORIES -> PublicationLazyRow(
+            PublicationType.STORIES -> PublicationsLazyRow(
                 publications = stories,
                 onProductTypeChange = {
                     onPublicationTypeChange(PublicationType.EVENTS)
@@ -160,7 +160,7 @@ private fun PublicationsBox(
                 emptyStatement = stringResource(id = R.string.hasn_t_participated_in_any_stories),
                 nextPublicationTitle = stringResource(id = R.string.events)
             )
-            else -> PublicationLazyRow(
+            else -> PublicationsLazyRow(
                 publications = events,
                 onProductTypeChange = {
                     onPublicationTypeChange(PublicationType.COMICS)

@@ -36,7 +36,7 @@ import com.kotlinhero.marvel.characters.domain.enums.PublicationType
 import com.kotlinhero.marvel.common.ui.reusables.image.NetworkImage
 
 @Composable
-fun PublicationLazyRow(
+fun PublicationsLazyRow(
     modifier: Modifier = Modifier,
     publications: List<Publication>,
     onProductTypeChange: (PublicationType) -> Unit,

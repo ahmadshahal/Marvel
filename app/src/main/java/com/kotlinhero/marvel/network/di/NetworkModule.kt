@@ -1,10 +1,11 @@
 package com.kotlinhero.marvel.network.di
 
 import com.kotlinhero.marvel.common.utils.generateTimestamp
+import com.kotlinhero.marvel.common.utils.md5Hash
 import com.kotlinhero.marvel.network.data.env.HOST
 import com.kotlinhero.marvel.network.data.env.PATH
+import com.kotlinhero.marvel.network.data.env.PRIVATE_API_KEY
 import com.kotlinhero.marvel.network.data.env.PUBLIC_API_KEY
-import com.kotlinhero.marvel.network.data.env.generateApiHash
 import com.kotlinhero.marvel.network.data.exceptions.ServerException
 import com.kotlinhero.marvel.network.data.models.ErrorResponse
 import io.ktor.client.HttpClient
@@ -84,32 +85,10 @@ val NetworkModule = module {
                     val timestamp = generateTimestamp()
                     parameters.append("ts", timestamp)
                     parameters.append("apikey", PUBLIC_API_KEY)
-                    parameters.append("hash", generateApiHash(timestamp))
+                    val hash = md5Hash(timestamp + PRIVATE_API_KEY + PUBLIC_API_KEY)
+                    parameters.append("hash", hash)
                 }
             }
-
-            /*
-            Auth {
-                bearer {
-                    loadTokens {
-                        val appDataStoreRepository: AppDataStoreRepository = get()
-                        val token = appDataStoreRepository.getToken() ?: ""
-                        BearerTokens(
-                            accessToken = token,
-                            refreshToken = token,
-                        )
-                    }
-                    refreshTokens {
-                        val appDataStoreRepository: AppDataStoreRepository = get()
-                        val token = appDataStoreRepository.getToken() ?: ""
-                        BearerTokens(
-                            accessToken = token,
-                            refreshToken = token,
-                        )
-                    }
-                }
-            }
-             */
         }
     }
 }
