@@ -86,7 +86,7 @@ fun CharacterDetailsScreen(viewModel: CharacterDetailsViewModel = koinViewModel(
                     is FetchState.Error -> NetflixErrorBox(
                         modifier = Modifier.padding(horizontal = 24.dp),
                         message = fetchState.message.asString(),
-                        onClickTryAgain = viewModel::refresh
+                        onClickTryAgain = viewModel::getData
                     )
                     is FetchState.Success -> {
                         val character = viewModel.character

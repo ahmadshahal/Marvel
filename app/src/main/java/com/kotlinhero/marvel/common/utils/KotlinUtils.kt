@@ -11,7 +11,7 @@ package com.kotlinhero.marvel.common.utils
  * @return A Result containing either a list of values if all results are successful, or a failure
  *         containing the exception from the first failing result encountered.
  */
-fun List<Result<*>>.evaluate(): Result<List<*>> {
+fun<T> List<Result<T>>.evaluate(): Result<List<T?>> {
     // Iterate over each Result in the list
     this.forEach {
         // If a Result is a failure, return a failure Result with the exception

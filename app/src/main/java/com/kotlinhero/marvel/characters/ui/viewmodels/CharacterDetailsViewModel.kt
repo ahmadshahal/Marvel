@@ -44,9 +44,7 @@ class CharacterDetailsViewModel(
         getData()
     }
 
-    fun refresh() = getData()
-
-    private fun getData() {
+    fun getData() {
         viewModelScope.launch {
             characterDetailsState =
                 characterDetailsState.copy(fetchState = FetchState.Loading())
