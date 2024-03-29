@@ -55,14 +55,14 @@ fun PublicationsLazyRow(
             Text(
                 text = title,
                 fontSize = 20.sp,
-                color = MaterialTheme.colorScheme.background,
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
                 fontWeight = FontWeight.Bold
             )
             Text(
                 modifier = Modifier.clickable { onProductTypeChange(PublicationType.STORIES) },
                 text = stringResource(R.string.view) + " " + nextPublicationTitle,
                 fontSize = 14.sp,
-                color = MaterialTheme.colorScheme.background,
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
                 fontWeight = FontWeight.Medium,
                 textDecoration = TextDecoration.Underline
             )
@@ -91,7 +91,7 @@ fun PublicationsLazyRow(
                     fontWeight = FontWeight.Medium,
                     fontSize = 14.sp,
                     textAlign = TextAlign.Center,
-                    color = MaterialTheme.colorScheme.background
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             }
         }
@@ -125,7 +125,7 @@ private fun PublicationItem(modifier: Modifier = Modifier, publication: Publicat
                 .padding(12.dp),
             text = publication.title,
             fontSize = 13.sp,
-            color = MaterialTheme.colorScheme.onPrimary,
+            color = MaterialTheme.colorScheme.onPrimaryContainer,
             fontWeight = FontWeight.ExtraBold,
             maxLines = 2,
             overflow = TextOverflow.Ellipsis

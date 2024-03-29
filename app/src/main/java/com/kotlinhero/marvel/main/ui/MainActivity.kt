@@ -10,8 +10,8 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import com.kotlinhero.marvel.common.ui.navigation.Destination
 import com.kotlinhero.marvel.common.ui.providers.LocalNavController
-import com.kotlinhero.marvel.common.ui.theme.MarvelTheme
 import com.kotlinhero.marvel.main.ui.navigation.MarvelNavHost
+import com.kotlinhero.marvel.main.ui.theme.MarvelTheme
 import com.kotlinhero.marvel.main.ui.viewmodels.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

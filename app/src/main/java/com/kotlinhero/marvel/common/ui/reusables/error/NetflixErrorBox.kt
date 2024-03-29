@@ -36,7 +36,7 @@ fun NetflixErrorBox(
             fontWeight = FontWeight.Medium,
             fontSize = 16.sp,
             textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.background,
+            color = MaterialTheme.colorScheme.onPrimaryContainer,
         )
         Spacer(modifier = Modifier.height(32.dp))
         DefaultButton(onClick = onClickTryAgain) {

@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import com.kotlinhero.marvel.common.ui.theme.DarkGray
+import com.kotlinhero.marvel.main.ui.theme.DarkGray
 
 @Composable
 fun shimmerBrush(

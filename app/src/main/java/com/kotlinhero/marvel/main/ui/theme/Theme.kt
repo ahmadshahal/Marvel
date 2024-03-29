@@ -1,4 +1,4 @@
-package com.kotlinhero.marvel.common.ui.theme
+package com.kotlinhero.marvel.main.ui.theme
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.lightColorScheme
@@ -16,7 +16,8 @@ private val ColorScheme = lightColorScheme(
     onPrimary = White,
     surface = White,
     onSurface = DarkGray,
-    surfaceContainer = DarkGray
+    surfaceContainer = DarkGray,
+    onPrimaryContainer = White
 )
 
 val Gilroy = FontFamily(

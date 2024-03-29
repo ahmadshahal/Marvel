@@ -201,7 +201,7 @@ private fun ColumnScope.CharacterDetails(modifier: Modifier = Modifier, characte
         Text(
             text = character.name,
             fontSize = 40.sp,
-            color = MaterialTheme.colorScheme.onPrimary,
+            color = MaterialTheme.colorScheme.onPrimaryContainer,
             fontWeight = FontWeight.ExtraBold,
             lineHeight = 56.sp
         )
@@ -211,7 +211,7 @@ private fun ColumnScope.CharacterDetails(modifier: Modifier = Modifier, characte
         Text(
             text = character.description,
             fontSize = 14.sp,
-            color = MaterialTheme.colorScheme.onPrimary,
+            color = MaterialTheme.colorScheme.onPrimaryContainer,
             fontWeight = FontWeight.Medium
         )
     }

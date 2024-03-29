@@ -33,7 +33,7 @@ fun NetflixLoadingBox(modifier: Modifier = Modifier) {
                 text = stringResource(R.string.loading),
                 fontWeight = FontWeight.Medium,
                 fontSize = 18.sp,
-                color = MaterialTheme.colorScheme.background
+                color = MaterialTheme.colorScheme.onPrimaryContainer
             )
             Spacer(modifier = Modifier.width(8.dp))
             CircularProgressIndicator(

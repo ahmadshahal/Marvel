@@ -1,4 +1,4 @@
-package com.kotlinhero.marvel.common.ui.theme
+package com.kotlinhero.marvel.main.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
