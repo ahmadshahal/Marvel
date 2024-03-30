@@ -7,6 +7,12 @@ Marvel Catalog App is an Android application that allows users to browse a catal
 - Browse a catalog of Marvel characters.
 - View detailed information about each character.
 
+## Compose
+This project uses Strong Skipping Mode for Jetpack Compose better performance.
+
+## Baseline Profile
+This project has baselineprofile module that generates profiles which will improve performance.
+
 ## Setup
 
 To run this project locally, you need to have Android Studio installed on your machine. Clone this repository and open it in Android Studio. Then build and run the project on an Android emulator or device.
