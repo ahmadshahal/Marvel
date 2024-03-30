@@ -1,10 +1,9 @@
 package com.kotlinhero.marvel
 
 import android.app.Application
-import com.kotlinhero.marvel.characters.di.CharactersModule
-import com.kotlinhero.marvel.common.di.CommonModule
+import com.kotlinhero.marvel.core.di.NetworkModule
+import com.kotlinhero.marvel.features.characters.di.CharactersModule
 import com.kotlinhero.marvel.main.di.MainModule
-import com.kotlinhero.marvel.network.di.NetworkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
@@ -19,7 +18,6 @@ class MarvelApplication : Application() {
             androidContext(this@MarvelApplication)
             modules(
                 MainModule,
-                CommonModule,
                 CharactersModule,
                 NetworkModule
             )

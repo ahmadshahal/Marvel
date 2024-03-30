@@ -8,9 +8,9 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.kotlinhero.marvel.characters.ui.screens.CharacterDetailsScreen
-import com.kotlinhero.marvel.characters.ui.screens.CharactersScreen
-import com.kotlinhero.marvel.common.ui.navigation.Destination
+import com.kotlinhero.marvel.core.ui.navigation.Destination
+import com.kotlinhero.marvel.features.characters.ui.screens.CharacterDetailsScreen
+import com.kotlinhero.marvel.features.characters.ui.screens.CharactersScreen
 
 @Composable
 fun MarvelNavHost(navController: NavHostController, startDestination: String) {

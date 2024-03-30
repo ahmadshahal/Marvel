@@ -2,7 +2,7 @@ package com.kotlinhero.marvel.main.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kotlinhero.marvel.common.ui.states.ChannelAction
+import com.kotlinhero.marvel.core.ui.states.ChannelAction
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.receiveAsFlow
