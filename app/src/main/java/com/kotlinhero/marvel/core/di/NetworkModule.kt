@@ -63,8 +63,8 @@ val NetworkModule = module {
             }
 
             engine {
-                connectTimeout = 15000 // 15 Seconds
-                socketTimeout = 15000 // 15 Seconds
+                connectTimeout = 6000 // 15 Seconds
+                socketTimeout = 6000 // 15 Seconds
             }
 
             install(Logging) {
